@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+using NerdStoreEnterprise.Services.Identity.API.Configuration;
 
 namespace NerdStoreEnterprise.Services.Identity.API
 {
@@ -14,20 +14,19 @@ namespace NerdStoreEnterprise.Services.Identity.API
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        private IConfiguration Configuration { get; }
+        
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCustomDatabase(Configuration);
+
+            services.AddCustomIdentity();
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NerdStoreEnterprise.Services.Identity.API", Version = "v1" });
-            });
-        }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            services.AddCustomSwagger();
+        }
+        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -41,6 +40,7 @@ namespace NerdStoreEnterprise.Services.Identity.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
