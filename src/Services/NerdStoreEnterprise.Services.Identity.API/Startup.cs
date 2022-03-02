@@ -1,4 +1,3 @@
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,6 +22,8 @@ namespace NerdStoreEnterprise.Services.Identity.API
             services.AddCustomDatabase(Configuration);
 
             services.AddCustomIdentity();
+
+            services.AddCustomAuthentication(Configuration);
 
             services.AddControllers()
                     .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
