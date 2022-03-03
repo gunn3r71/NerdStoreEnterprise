@@ -9,22 +9,18 @@ namespace NerdStoreEnterprise.Services.Identity.API.Configuration
 {
     public static class IdentityConfig
     {
-        public static IServiceCollection AddCustomIdentity(this IServiceCollection services)
+        public static void AddCustomIdentity(this IServiceCollection services)
         {
             services.AddDefaultIdentity<IdentityUser>(ConfigureIdentityOptions)
                     .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
-
-            return services;
         }
 
-        public static IApplicationBuilder UseCustomIdentity(this IApplicationBuilder app)
+        public static void UseCustomIdentity(this IApplicationBuilder app)
         {
             app.UseAuthentication();
             app.UseAuthorization();
-
-            return app;
         }
 
         private static void ConfigureIdentityOptions(IdentityOptions identityOptions)

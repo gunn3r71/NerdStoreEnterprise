@@ -9,7 +9,7 @@ namespace NerdStoreEnterprise.Services.Identity.API.Configuration
 {
     public static class SwaggerConfiguration
     {
-        public static IServiceCollection AddCustomSwagger(this IServiceCollection services)
+        public static void AddCustomSwagger(this IServiceCollection services)
         {
             var openApiInfo = new OpenApiInfo
             {
@@ -27,18 +27,14 @@ namespace NerdStoreEnterprise.Services.Identity.API.Configuration
             {
                 c.SwaggerDoc("v1", openApiInfo);
             });
-
-            return services;
         }
 
-        public static IApplicationBuilder UseCustomSwagger(this IApplicationBuilder app, IWebHostEnvironment env)
+        public static void UseCustomSwagger(this IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (!env.IsDevelopment()) return app;
-           
+            if (!env.IsDevelopment()) return;
+
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NerdStoreEnterprise.Services.Identity.API v1"));
-
-            return app;
         }
     }
 }

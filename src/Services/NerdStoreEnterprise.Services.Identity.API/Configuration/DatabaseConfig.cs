@@ -7,8 +7,8 @@ namespace NerdStoreEnterprise.Services.Identity.API.Configuration
 {
     public static class DatabaseConfig
     {
-        public static IServiceCollection AddCustomDatabase(this IServiceCollection services,
-                                                           IConfiguration configuration)
+        public static void AddCustomDatabase(this IServiceCollection services,
+            IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(o =>
             {
@@ -21,8 +21,6 @@ namespace NerdStoreEnterprise.Services.Identity.API.Configuration
                     x.CommandTimeout(15);
                 });
             });
-
-            return services;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace NerdStoreEnterprise.Services.Identity.API.Configuration
 {
     public static class AuthenticationConfig
     {
-        public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
+        public static void AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             var tokenSettingsSettings = configuration.GetSection("TokenSettings");
             services.Configure<TokenSettings>(tokenSettingsSettings);
@@ -35,8 +35,6 @@ namespace NerdStoreEnterprise.Services.Identity.API.Configuration
                     ValidIssuer = tokenSettings.Issuer
                 };
             });
-            
-            return services;
         }
     }
 }
