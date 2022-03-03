@@ -27,4 +27,8 @@
     <Folder Include="Extensions\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\NerdStoreEnterprise.BuildingBlocks.Core\NerdStoreEnterprise.BuildingBlocks.Core.csproj" />
+  </ItemGroup>
+
 </Project>
