@@ -10,9 +10,18 @@ namespace NerdStoreEnterprise.Services.Identity.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IHostEnvironment hostEnvironment)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(hostEnvironment.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", true, true)
+                .AddEnvironmentVariables();
+
+            if (hostEnvironment.IsDevelopment())
+                builder.AddUserSecrets<Startup>();
+                
+            Configuration = builder.Build();
         }
 
         private IConfiguration Configuration { get; }
@@ -25,32 +34,16 @@ namespace NerdStoreEnterprise.Services.Identity.API
 
             services.AddCustomAuthentication(Configuration);
 
-            services.AddControllers()
-                    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
+            services.AddApiConfiguration();
 
             services.AddCustomSwagger();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NerdStoreEnterprise.Services.Identity.API v1"));
-            }
+            app.UseCustomSwagger(env);
 
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseApiConfiguration();
         }
     }
 }

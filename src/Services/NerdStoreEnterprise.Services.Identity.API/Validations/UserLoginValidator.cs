@@ -9,8 +9,7 @@ namespace NerdStoreEnterprise.Services.Identity.API.Validations
         {
             RuleFor(x => x.Username)
                 .NotEmpty()
-                .NotNull()
-                .EmailAddress();
+                .NotNull();
 
             RuleFor(x => x.Password)
                 .NotEmpty()

@@ -74,9 +74,9 @@ namespace NerdStoreEnterprise.Services.Identity.API.Controllers
             return CustomResponse();
         }
 
-        private async Task<TokenViewModel> GetTokenAsync(string email)
+        private async Task<TokenViewModel> GetTokenAsync(string username)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByNameAsync(username);
 
             var userClaims = await GetUserClaims(user);
 

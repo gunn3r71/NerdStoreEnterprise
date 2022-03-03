@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using NerdStoreEnterprise.Services.Identity.API.Data;
@@ -16,6 +17,14 @@ namespace NerdStoreEnterprise.Services.Identity.API.Configuration
                     .AddDefaultTokenProviders();
 
             return services;
+        }
+
+        public static IApplicationBuilder UseCustomIdentity(this IApplicationBuilder app)
+        {
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            return app;
         }
 
         private static void ConfigureIdentityOptions(IdentityOptions identityOptions)
