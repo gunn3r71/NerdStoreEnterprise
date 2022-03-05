@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{FE31CD77-359
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{7B6A9B15-0C27-4285-B09F-9ABAAB847D0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStoreEnterprise.Services.Identity.API", "src\Services\NerdStoreEnterprise.Services.Identity.API\NerdStoreEnterprise.Services.Identity.API.csproj", "{B88B6C4A-D45C-4E76-B4E9-96686C11219F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStoreEnterprise.Services.Identity.API", "src\Services\NerdStoreEnterprise.Services.Identity.API\NerdStoreEnterprise.Services.Identity.API.csproj", "{B88B6C4A-D45C-4E76-B4E9-96686C11219F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStoreEnterprise.WebApp.Mvc", "src\Web\NerdStoreEnterprise.WebApp.Mvc\NerdStoreEnterprise.WebApp.Mvc.csproj", "{6D7A18F1-A0BD-4B5D-B37B-35729C58789B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStoreEnterprise.WebApp.Mvc", "src\Web\NerdStoreEnterprise.WebApp.Mvc\NerdStoreEnterprise.WebApp.Mvc.csproj", "{6D7A18F1-A0BD-4B5D-B37B-35729C58789B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4B08FCAC-54AA-4506-BBFD-8E777AD657B3}"
 EndProject
@@ -23,29 +23,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cart", "Cart", "{3A799C80-0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{AF580F3C-EAD3-4C4D-A3E4-C8F50DD800CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStoreEnterprise.BuildingBlocks.Core", "NerdStoreEnterprise.BuildingBlocks.Core\NerdStoreEnterprise.BuildingBlocks.Core.csproj", "{94ACAAAB-685A-47F0-9EE3-067DF6E53307}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStoreEnterprise.BuildingBlocks.Core", "NerdStoreEnterprise.BuildingBlocks.Core\NerdStoreEnterprise.BuildingBlocks.Core.csproj", "{94ACAAAB-685A-47F0-9EE3-067DF6E53307}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStoreEnterprise.Services.Cart.API", "src\Services\NerdStoreEnterprise.Services.Cart\NerdStoreEnterprise.Services.Cart.API.csproj", "{2832DC3E-5CB0-4568-91AF-B505816CDA66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStoreEnterprise.Services.Cart.API", "src\Services\NerdStoreEnterprise.Services.Cart\NerdStoreEnterprise.Services.Cart.API.csproj", "{2832DC3E-5CB0-4568-91AF-B505816CDA66}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{25CAA3EB-4572-456E-AAC6-2124DFDFF0BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStoreEnterprise.Services.Catalog.API", "src\Services\NerdStoreEnterprise.Services.Catalog.API\NerdStoreEnterprise.Services.Catalog.API.csproj", "{AA19CC41-4A03-4787-B150-13B72FED33FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStoreEnterprise.Services.Catalog.API", "src\Services\NerdStoreEnterprise.Services.Catalog.API\NerdStoreEnterprise.Services.Catalog.API.csproj", "{AA19CC41-4A03-4787-B150-13B72FED33FD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{0B8F483D-545B-415F-A570-DED05453963A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStoreEnterprise.Services.Client.API", "src\Services\NerdStoreEnterprise.Services.Client.API\NerdStoreEnterprise.Services.Client.API.csproj", "{CDC4F526-E7E0-4FBD-B99F-D61B0C87E7E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStoreEnterprise.Services.Client.API", "src\Services\NerdStoreEnterprise.Services.Client.API\NerdStoreEnterprise.Services.Client.API.csproj", "{CDC4F526-E7E0-4FBD-B99F-D61B0C87E7E2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment", "Payment", "{A2DEB2F1-D80B-4E2C-B4AD-0097A22E23A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStoreEnterprise.Services.Payment.API", "src\services\NerdStoreEnterprise.Services.Payment.API\NerdStoreEnterprise.Services.Payment.API.csproj", "{C63C3335-690D-4A83-B2DB-550248553EE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStoreEnterprise.Services.Payment.API", "src\services\NerdStoreEnterprise.Services.Payment.API\NerdStoreEnterprise.Services.Payment.API.csproj", "{C63C3335-690D-4A83-B2DB-550248553EE8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{F3641341-317F-4AEC-AEB7-35B90DAA73ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStoreEnterprise.Services.Order.API", "src\Services\NerdStoreEnterprise.Services.Order.API\NerdStoreEnterprise.Services.Order.API.csproj", "{682C8E8D-76CC-4C6A-BB0B-59D2A0936B79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStoreEnterprise.Services.Order.API", "src\Services\NerdStoreEnterprise.Services.Order.API\NerdStoreEnterprise.Services.Order.API.csproj", "{682C8E8D-76CC-4C6A-BB0B-59D2A0936B79}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC", "MVC", "{9FFE1B16-B4E6-44E4-AB1A-C732474525BB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SPA", "SPA", "{2C1C1BB6-EB13-4FE6-A8F7-C9D214CAD822}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,7 +107,6 @@ Global
 		{F3641341-317F-4AEC-AEB7-35B90DAA73ED} = {2AE772B1-5916-42E3-9A26-1DC8C3E30A2A}
 		{682C8E8D-76CC-4C6A-BB0B-59D2A0936B79} = {F3641341-317F-4AEC-AEB7-35B90DAA73ED}
 		{9FFE1B16-B4E6-44E4-AB1A-C732474525BB} = {FE31CD77-3595-4FFF-BDA8-907B0DDD7CD6}
-		{2C1C1BB6-EB13-4FE6-A8F7-C9D214CAD822} = {FE31CD77-3595-4FFF-BDA8-907B0DDD7CD6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46B81646-5E96-4F6B-966B-2FF531A89CAE}

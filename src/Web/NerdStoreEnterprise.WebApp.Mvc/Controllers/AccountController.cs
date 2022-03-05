@@ -28,19 +28,34 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginViewModel login)
         {
-            return Ok();
+            if (!ModelState.IsValid) return View(login);
+
+            //TODO -> call api login endpoint
+
+            if (false) return View(login);
+
+
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterViewModel register)
         {
-            return Ok();
+            if (!ModelState.IsValid) return View(register);
+
+            //TODO -> call api register endpoint
+            
+            if (false) return View(register);
+
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
-            return Ok();
+            //TODO -> clean cookies
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
