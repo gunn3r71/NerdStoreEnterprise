@@ -1,12 +1,27 @@
-﻿using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using NerdStoreEnterprise.WebApp.Mvc.Models.Users;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.IdentityModel.Tokens;
+using NerdStoreEnterprise.WebApp.Mvc.Models.AuthenticationResponse;
+using IAuthenticationService = NerdStoreEnterprise.WebApp.Mvc.Services.IAuthenticationService;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
+        private readonly IAuthenticationService _authenticationService;
+
+        public AccountController(IAuthenticationService authenticationService)
+        {
+            _authenticationService = authenticationService;
+        }
+
         [HttpGet("login")]
         public IActionResult Login()
         {
@@ -29,11 +44,10 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
         public async Task<IActionResult> Login(UserLoginViewModel login)
         {
             if (!ModelState.IsValid) return View(login);
+            
+            var result = await _authenticationService.Login(login);
 
-            //TODO -> call api login endpoint
-
-            if (false) return View(login);
-
+            if (HasErrors(result.ErrorDetails)) return View(login);
 
             return RedirectToAction("Index", "Home");
         }
@@ -43,9 +57,11 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
         {
             if (!ModelState.IsValid) return View(register);
 
-            //TODO -> call api register endpoint
-            
-            if (false) return View(register);
+            var result = await _authenticationService.Register(register);
+
+            if (HasErrors(result.ErrorDetails)) return View(register);
+
+            await ApplicationAuthenticationAsync(result);
 
             return RedirectToAction("Index", "Home");
         }
@@ -53,9 +69,39 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
-            //TODO -> clean cookies
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
+
+        private async Task ApplicationAuthenticationAsync(TokenViewModel tokenModel)
+        {
+            var token = GetFormattedJwtSecurityToken(tokenModel.AccessToken);
+
+            var userClaims = new List<Claim>();
+            userClaims.Add(new Claim("JWT", tokenModel.AccessToken));
+            userClaims.AddRange(token.Claims);
+
+            var claimsIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var authProperties = new AuthenticationProperties
+            {
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60),
+                IsPersistent = true
+            };
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
+
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                Console.WriteLine("Autenticado");
+            }
+        }
+
+        private static JwtSecurityToken GetFormattedJwtSecurityToken(string token)
+            => new JwtSecurityTokenHandler().ReadJwtToken(token);
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using NerdStoreEnterprise.WebApp.Mvc.Models.Errors;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
 {
@@ -31,7 +32,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

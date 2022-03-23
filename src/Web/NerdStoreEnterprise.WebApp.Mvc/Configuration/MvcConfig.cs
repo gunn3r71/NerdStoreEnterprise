@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -9,7 +11,8 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
     {
         public static void AddCustomMvc(this IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddJsonOptions(x => x.JsonSerializerOptions.PropertyNameCaseInsensitive = true);
         }
 
         public static void UseCustomMvc(this IApplicationBuilder app, IWebHostEnvironment env)
@@ -36,6 +39,14 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private static JsonOptions ConfigureJsonOptions(JsonOptions options)
+        {
+            options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+
+            return options;
         }
     }
 }

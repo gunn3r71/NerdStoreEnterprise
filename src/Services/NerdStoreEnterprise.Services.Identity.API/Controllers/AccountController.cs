@@ -47,7 +47,7 @@ namespace NerdStoreEnterprise.Services.Identity.API.Controllers
 
             var result = await _userManager.CreateAsync(applicationUser, user.Password);
 
-            if (result.Succeeded) return CustomResponse(await GetTokenAsync(user.Email));
+            if (result.Succeeded) return CustomResponse(await GetTokenAsync(user.Username));
 
             AddError(result.Errors.Select(x => x.Description));
 
