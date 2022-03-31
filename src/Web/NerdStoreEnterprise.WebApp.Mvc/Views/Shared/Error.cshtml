@@ -3,13 +3,18 @@
     ViewData["Title"] = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
-
-@if (Model.Errors.Messages.Any())
-{
-    foreach (var error in Model.Errors.Messages)
+@{
+    if (Model is null)
+    {   
+        <div>
+            <h2>We are unable to fulfill your request at the moment, please try again later.</h2>
+        </div>
+    }
+    else
     {
-        <p>error: @error</p>
+        <div>
+            <h1 class="text-danger">@Model.Title</h1>
+            <h2 class="text-danger">@Model.Description</h2>
+        </div>
     }
 }

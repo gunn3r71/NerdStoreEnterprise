@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NerdStoreEnterprise.WebApp.Mvc.Extensions;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
 {
@@ -11,27 +12,26 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
     {
         public static void AddCustomMvc(this IServiceCollection services)
         {
-            services.AddControllersWithViews()
-                .AddJsonOptions(x => x.JsonSerializerOptions.PropertyNameCaseInsensitive = true);
+            services.AddControllersWithViews();
         }
 
         public static void UseCustomMvc(this IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
-            }
+            app.UseExceptionHandler("/error/500");
+            
+            app.UseStatusCodePagesWithRedirects("/error/{0}");
+            
+            app.UseHsts();
+            
             app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseCustomAuthentication();
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
@@ -39,14 +39,6 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-        }
-
-        private static JsonOptions ConfigureJsonOptions(JsonOptions options)
-        {
-            options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-
-            return options;
         }
     }
 }

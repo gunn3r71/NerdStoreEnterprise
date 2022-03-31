@@ -23,8 +23,9 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
         }
 
         [HttpGet("login")]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
@@ -41,7 +42,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserLoginViewModel login)
+        public async Task<IActionResult> Login(UserLoginViewModel login, string returnUrl = null)
         {
             if (!ModelState.IsValid) return View(login);
             
@@ -49,7 +50,9 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
 
             if (HasErrors(result.ErrorDetails)) return View(login);
 
-            return RedirectToAction("Index", "Home");
+            if (string.IsNullOrWhiteSpace(returnUrl)) return RedirectToAction("Index", "Home");
+
+            return LocalRedirect(returnUrl);
         }
 
         [HttpPost("register")]

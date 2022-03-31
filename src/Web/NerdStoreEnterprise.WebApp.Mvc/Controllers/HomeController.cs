@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using NerdStoreEnterprise.WebApp.Mvc.Models.Errors;
 
@@ -29,10 +30,23 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [Route("error/{code:length(3,3):int}")]
+        public IActionResult Error(int code)
         {
-            return View();
+            var model = new ErrorViewModel
+            {
+                Title = "Oops, something went wrong..",
+                Status = code,
+                Description = (HttpStatusCode) code switch
+                {
+                    HttpStatusCode.InternalServerError => "We are unable to fulfill your request at the moment, please try again later.",
+                    HttpStatusCode.Forbidden => "You are not allowed to do this.",
+                    HttpStatusCode.NotFound => "Page not found.",
+                    _ => "Page not found."
+                }
+            };
+
+            return View("Error", model);
         }
     }
 }
