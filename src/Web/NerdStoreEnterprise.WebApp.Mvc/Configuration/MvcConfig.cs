@@ -1,18 +1,18 @@
-﻿using System.Text.Json;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using NerdStoreEnterprise.WebApp.Mvc.Extensions;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
 {
     public static class WebAppConfig
     {
-        public static void AddCustomMvc(this IServiceCollection services)
+        public static void AddCustomMvc(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllersWithViews();
+
+            services.Configure<ServicesUrls>(configuration);
         }
 
         public static void UseCustomMvc(this IApplicationBuilder app, IWebHostEnvironment env)
