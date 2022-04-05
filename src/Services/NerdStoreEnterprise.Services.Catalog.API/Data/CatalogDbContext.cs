@@ -1,10 +1,12 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using NerdStoreEnterprise.BuildingBlocks.Core.DomainObjects;
 using NerdStoreEnterprise.Services.Catalog.API.Models;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Data
 {
-    public class CatalogDbContext : DbContext
+    public class CatalogDbContext : DbContext, IUnitOfWork
     {
         public CatalogDbContext(DbContextOptions<CatalogDbContext> options) : base(options)
         {
@@ -24,5 +26,8 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Data
             foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");
         }
+
+        public async Task<bool> CommitAsync() => 
+            await base.SaveChangesAsync() > 0;
     }
 }

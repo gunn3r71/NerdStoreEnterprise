@@ -31,9 +31,6 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Data.Mappings
 
             builder.Property(product => product.CreatedAt)
                 .IsRequired();
-
-            builder.Property(product => product.Status)
-                .HasDefaultValue(true);
         }
     }
 }

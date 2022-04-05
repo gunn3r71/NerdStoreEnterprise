@@ -3,7 +3,7 @@ using NerdStoreEnterprise.BuildingBlocks.Core.DomainObjects;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Models
 {
-    public class Product : Entity
+    public class Product : Entity, IAggregateRoot
     {
         protected Product()
         {
