@@ -1,20 +1,21 @@
-using Microsoft.AspNetCore.Hosting;
+using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 
 namespace NerdStoreEnterprise.Services.Identity.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
-        }
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? Environments.Development;
+            var contentRootPath = Directory.GetCurrentDirectory();
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+            await ServiceHost.Create<Startup>(args, env, contentRootPath)
+                .Build()
+                .RunAsync();
+        }
     }
 }

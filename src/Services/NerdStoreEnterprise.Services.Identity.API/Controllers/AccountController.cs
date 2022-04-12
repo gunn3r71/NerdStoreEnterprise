@@ -11,7 +11,7 @@ using NerdStoreEnterprise.Services.Identity.API.Models;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using NerdStoreEnterprise.Services.Identity.API.Extensions;
+using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity;
 
 namespace NerdStoreEnterprise.Services.Identity.API.Controllers
 {

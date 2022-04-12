@@ -17,12 +17,6 @@ namespace NerdStoreEnterprise.Services.Identity.API.Configuration
                     .AddDefaultTokenProviders();
         }
 
-        public static void UseCustomIdentity(this IApplicationBuilder app)
-        {
-            app.UseAuthentication();
-            app.UseAuthorization();
-        }
-
         private static void ConfigureIdentityOptions(IdentityOptions identityOptions)
         {
             identityOptions.Lockout = new LockoutOptions

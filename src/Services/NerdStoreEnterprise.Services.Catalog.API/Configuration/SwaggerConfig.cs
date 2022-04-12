@@ -33,7 +33,7 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Configuration
             if (!env.IsDevelopment()) return;
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NerdStoreEnterprise.Services.Identity.API v1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NerdStoreEnterprise.Services.Catalog.API v1"));
         }
     }
 }

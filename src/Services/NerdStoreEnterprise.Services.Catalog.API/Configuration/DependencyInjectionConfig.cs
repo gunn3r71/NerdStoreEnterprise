@@ -5,9 +5,9 @@ using NerdStoreEnterprise.Services.Catalog.API.Models;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Configuration
 {
-    public static class DependenciesConfig
+    public static class DependencyInjectionConfig
     {
-        public static void ResolveDependencies(this IServiceCollection services)
+        public static void RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<CatalogDbContext>();

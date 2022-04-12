@@ -21,4 +21,8 @@
     <Folder Include="Exceptions\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Building Blocks\NerdStoreEnterprise.BuildingBlocks.WebAPI.Core\NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.csproj" />
+  </ItemGroup>
+
 </Project>

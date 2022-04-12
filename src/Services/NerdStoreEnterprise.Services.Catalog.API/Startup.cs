@@ -9,17 +9,9 @@ namespace NerdStoreEnterprise.Services.Catalog.API
 {
     public class Startup
     {
-        public Startup(IWebHostEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", false, true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", false, true)
-                .AddEnvironmentVariables();
-
-            if (env.IsDevelopment()) builder.AddUserSecrets<Startup>();
-
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
         private IConfiguration Configuration { get; }

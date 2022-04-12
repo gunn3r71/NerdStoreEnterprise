@@ -1,22 +1,22 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using NerdStoreEnterprise.Services.Identity.API.Extensions;
 
-namespace NerdStoreEnterprise.Services.Identity.API.Configuration
+namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity
 {
     public static class AuthenticationConfig
     {
-        public static void AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             var tokenSettingsSettings = configuration.GetSection("TokenSettings");
             services.Configure<TokenSettings>(tokenSettingsSettings);
 
             var tokenSettings = tokenSettingsSettings.Get<TokenSettings>();
             var key = Encoding.ASCII.GetBytes(tokenSettings.Secret);
-            
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -35,6 +35,16 @@ namespace NerdStoreEnterprise.Services.Identity.API.Configuration
                     ValidIssuer = tokenSettings.Issuer
                 };
             });
+
+            return services;
+        }
+
+        public static IApplicationBuilder UseCustomAuthentication(this IApplicationBuilder app)
+        {
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            return app;
         }
     }
 }
