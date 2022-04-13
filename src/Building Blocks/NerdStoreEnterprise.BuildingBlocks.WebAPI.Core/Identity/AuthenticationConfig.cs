@@ -9,6 +9,12 @@ namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity
 {
     public static class AuthenticationConfig
     {
+        /// <summary>
+        /// Add authentication configuration
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="configuration">The configuration</param>
+        /// <returns>Service collection</returns>
         public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             var tokenSettingsSettings = configuration.GetSection("TokenSettings");
@@ -39,6 +45,11 @@ namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity
             return services;
         }
 
+        /// <summary>
+        /// Configure authentication in the application
+        /// </summary>
+        /// <param name="app">The application builder</param>
+        /// <returns>Application builder</returns>
         public static IApplicationBuilder UseCustomAuthentication(this IApplicationBuilder app)
         {
             app.UseAuthentication();

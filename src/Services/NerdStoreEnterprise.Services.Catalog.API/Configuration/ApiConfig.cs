@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Configuration
 {
@@ -15,6 +16,10 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Configuration
 
             services.AddControllers();
 
+            services.AddCustomAuthentication(configuration);
+
+            services.AddCorsPolicies();
+
             services.AddCustomSwagger();
         }
 
@@ -26,7 +31,9 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Configuration
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseCors("FullAccess");
+
+            app.UseCustomAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
@@ -34,7 +41,7 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Configuration
             });
         }
 
-        private static void ConfigureCors(this IServiceCollection services)
+        private static void AddCorsPolicies(this IServiceCollection services)
         {
             services.AddCors(options =>
             {

@@ -22,7 +22,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\NerdStoreEnterprise.BuildingBlocks.Core\NerdStoreEnterprise.BuildingBlocks.Core.csproj" />
 		<ProjectReference Include="..\..\Building Blocks\NerdStoreEnterprise.BuildingBlocks.Core\NerdStoreEnterprise.BuildingBlocks.Core.csproj" />
 		<ProjectReference Include="..\..\Building Blocks\NerdStoreEnterprise.BuildingBlocks.WebAPI.Core\NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.csproj" />
 	</ItemGroup>

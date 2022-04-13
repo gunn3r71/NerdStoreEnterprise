@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.OpenAPI.Filters;
 
 namespace NerdStoreEnterprise.Services.Identity.API.Configuration
 {
@@ -25,6 +25,7 @@ namespace NerdStoreEnterprise.Services.Identity.API.Configuration
 
             services.AddSwaggerGen(c =>
             {
+                c.OperationFilter<StatusCodeDocumentationOperationFilter>();
                 c.SwaggerDoc("v1", openApiInfo);
             });
         }

@@ -6,6 +6,12 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.14" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Identity\Authorization\" />
+	  <Folder Include="OpenAPI\Filters\" />
 	</ItemGroup>
 
 </Project>

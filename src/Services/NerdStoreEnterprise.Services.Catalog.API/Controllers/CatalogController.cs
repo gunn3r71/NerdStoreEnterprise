@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity.Authorization;
 using NerdStoreEnterprise.Services.Catalog.API.Models;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize]
     public class CatalogController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
@@ -27,6 +30,7 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Controllers
             return Ok(products);
         }
 
+        [ClaimsAuthorize("catalog", "read")]
         [HttpGet("products/{id:guid}")]
         [ProducesResponseType(typeof(Product), (int) HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
