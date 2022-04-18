@@ -22,7 +22,7 @@ namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity.Authorization
                 return;
             }
 
-            if (CustomAuthorization.ValidateUserClaims(context.HttpContext, _claim))
+            if (!CustomAuthorization.ValidateUserClaims(context.HttpContext, _claim))
                 context.Result = new StatusCodeResult((int) HttpStatusCode.Forbidden);
         }
     }

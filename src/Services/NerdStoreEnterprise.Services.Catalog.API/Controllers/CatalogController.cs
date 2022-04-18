@@ -21,6 +21,7 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Controllers
             _productRepository = productRepository;
         }
 
+        [AllowAnonymous]
         [HttpGet("products")]
         [ProducesResponseType(typeof(IEnumerable<Product>), (int) HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<Product>>> GetAll()
@@ -30,7 +31,7 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Controllers
             return Ok(products);
         }
 
-        [ClaimsAuthorize("catalog", "read")]
+        [ClaimsAuthorize("catalog", "insert")]
         [HttpGet("products/{id:guid}")]
         [ProducesResponseType(typeof(Product), (int) HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
