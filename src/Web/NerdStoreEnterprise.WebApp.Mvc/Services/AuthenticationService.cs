@@ -27,7 +27,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Services
 
             var response = await _httpClient.PostAsync("/api/v1/account/authenticate", content);
 
-            if (!IsSuccess(response))
+            if (!HandleResponse(response))
             {
                 return new TokenViewModel
                 {
@@ -44,7 +44,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Services
 
             var response = await _httpClient.PostAsync("/api/v1/account/register", content);
 
-            if (!IsSuccess(response))
+            if (!HandleResponse(response))
             {
                 return new TokenViewModel
                 {

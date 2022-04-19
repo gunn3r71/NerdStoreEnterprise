@@ -8,6 +8,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddHttpClient<IAuthenticationService, AuthenticationService>();
+            services.AddHttpClient<ICatalogService, CatalogService>();
         }
     }
 }

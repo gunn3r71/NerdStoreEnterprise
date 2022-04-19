@@ -25,7 +25,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Services
             return JsonSerializer.Deserialize<T>(await response.Content.ReadAsStringAsync(), options);
         }
 
-        protected bool IsSuccess(HttpResponseMessage response)
+        protected static bool HandleResponse(HttpResponseMessage response)
         {
             switch (response.StatusCode)
             {

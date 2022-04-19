@@ -31,7 +31,7 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Controllers
             return Ok(products);
         }
 
-        [ClaimsAuthorize("catalog", "insert")]
+        [ClaimsAuthorize("catalog", "read")]
         [HttpGet("products/{id:guid}")]
         [ProducesResponseType(typeof(Product), (int) HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
