@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using IAuthenticationService = NerdStoreEnterprise.WebApp.Mvc.Services.IAuthenticationService;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
@@ -21,6 +22,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
             _authenticationService = authenticationService;
         }
 
+        [AllowAnonymous]
         [HttpGet("login")]
         public IActionResult Login(string returnUrl = null)
         {
@@ -28,32 +30,32 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpGet("register")]
-        public IActionResult Register()
-        {
-            return View();
-        }
+        public IActionResult Register() => View();
 
+        [AllowAnonymous]
         [HttpGet("access-denied")]
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
+        public IActionResult AccessDenied() => View();
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginViewModel login, string returnUrl = null)
         {
             if (!ModelState.IsValid) return View(login);
-            
+
             var result = await _authenticationService.Login(login);
 
             if (HasErrors(result.ErrorDetails)) return View(login);
+
+            await ApplicationAuthenticationAsync(result);
 
             if (string.IsNullOrWhiteSpace(returnUrl)) return RedirectToAction("Index", "Home");
 
             return LocalRedirect(returnUrl);
         }
 
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterViewModel register)
         {
@@ -68,7 +70,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpPost("logout")]
+        [HttpGet("logout")]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -80,8 +82,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
         {
             var token = GetFormattedJwtSecurityToken(tokenModel.AccessToken);
 
-            var userClaims = new List<Claim>();
-            userClaims.Add(new Claim("JWT", tokenModel.AccessToken));
+            var userClaims = new List<Claim> { new("JWT", tokenModel.AccessToken) };
             userClaims.AddRange(token.Claims);
 
             var claimsIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -98,7 +99,6 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
                 authProperties);
         }
 
-        private static JwtSecurityToken GetFormattedJwtSecurityToken(string token)
-            => new JwtSecurityTokenHandler().ReadJwtToken(token);
+        private static JwtSecurityToken GetFormattedJwtSecurityToken(string token) => new JwtSecurityTokenHandler().ReadJwtToken(token);
     }
 }

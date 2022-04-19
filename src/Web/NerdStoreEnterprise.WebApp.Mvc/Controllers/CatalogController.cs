@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using NerdStoreEnterprise.WebApp.Mvc.Services;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
@@ -14,21 +15,15 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
             _catalogService = catalogService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("")]
         [Route("catalog")]
-        public async Task<IActionResult> Index()
-        {
-            var products = await _catalogService.GetAll();
-            return View(products);
-        }
+        public async Task<IActionResult> Index() => 
+            View(await _catalogService.GetAll());
 
         [HttpGet("catalog/product/details/{id:guid}")]
-        public async Task<IActionResult> ProductDetails(Guid id)
-        {
-            var product = await _catalogService.GetById(id);
-
-            return View(product);
-        }
+        public async Task<IActionResult> ProductDetails(Guid id) => 
+            View(await _catalogService.GetById(id));
     }
 }

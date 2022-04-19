@@ -43,7 +43,7 @@ namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core
                 .AddEnvironmentVariables()
                 .AddCommandLine(args);
 
-            if (env.Contains("Development")) configuration.AddUserSecrets<TStartup>();
+            //if (env.Contains("Development")) configuration.AddUserSecrets<TStartup>(); 
 
             var builder = WebHost.CreateDefaultBuilder(args)
                 .ConfigureLogging(x =>

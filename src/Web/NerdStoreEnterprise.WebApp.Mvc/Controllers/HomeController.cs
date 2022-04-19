@@ -1,17 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using NerdStoreEnterprise.WebApp.Mvc.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using NerdStoreEnterprise.WebApp.Mvc.Models.Errors;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -20,16 +15,12 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        [AllowAnonymous]
+        public IActionResult Index() => RedirectToAction("Index", "Catalog");
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        public IActionResult Privacy() => View();
 
+        [AllowAnonymous]
         [Route("error/{code:length(3,3):int}")]
         public IActionResult Error(int code)
         {

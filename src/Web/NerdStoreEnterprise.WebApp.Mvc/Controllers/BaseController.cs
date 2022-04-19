@@ -1,9 +1,11 @@
 ﻿using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NerdStoreEnterprise.WebApp.Mvc.Models.Errors;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
 {
+    [Authorize]
     public abstract class BaseController : Controller
     {
         protected bool HasErrors(ErrorViewModel error)
