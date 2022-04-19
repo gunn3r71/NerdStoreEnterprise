@@ -96,11 +96,6 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
-
-            if (HttpContext.User.Identity.IsAuthenticated)
-            {
-                Console.WriteLine("Autenticado");
-            }
         }
 
         private static JwtSecurityToken GetFormattedJwtSecurityToken(string token)

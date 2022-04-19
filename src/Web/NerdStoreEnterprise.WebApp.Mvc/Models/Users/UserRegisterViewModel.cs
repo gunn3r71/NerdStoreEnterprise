@@ -1,6 +1,6 @@
 ﻿namespace NerdStoreEnterprise.WebApp.Mvc.Models.Users
 {
-    public class UserRegisterViewModel
+    public record UserRegisterViewModel
     {
         public string Username { get; set; }
         public string Email { get; set; }

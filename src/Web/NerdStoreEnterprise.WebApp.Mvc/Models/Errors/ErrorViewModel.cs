@@ -1,6 +1,6 @@
 namespace NerdStoreEnterprise.WebApp.Mvc.Models.Errors
 {
-    public class ErrorViewModel
+    public record ErrorViewModel
     {
         public string Title { get; set; }
         public string Description { get; set; }
