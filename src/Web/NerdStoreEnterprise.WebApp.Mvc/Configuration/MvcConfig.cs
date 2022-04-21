@@ -10,8 +10,12 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
     {
         public static void AddCustomMvc(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<ServicesUrls>(configuration.GetSection("ServicesUrls"));
+            services.AddCustomAuthentication();
 
+            services.RegisterServices(configuration);
+            
+            services.Configure<ServicesUrls>(configuration.GetSection("ServicesUrls"));
+            
             services.AddControllersWithViews();
         }
 

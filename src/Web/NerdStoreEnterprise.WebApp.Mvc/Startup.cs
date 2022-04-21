@@ -15,18 +15,8 @@ namespace NerdStoreEnterprise.WebApp.Mvc
 
         private IConfiguration Configuration { get; }
         
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddCustomAuthentication();
+        public void ConfigureServices(IServiceCollection services) => services.AddCustomMvc(Configuration);
 
-            services.RegisterServices();
-
-            services.AddCustomMvc(Configuration);
-        }
-        
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            app.UseCustomMvc(env);
-        }
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) => app.UseCustomMvc(env);
     }
 }

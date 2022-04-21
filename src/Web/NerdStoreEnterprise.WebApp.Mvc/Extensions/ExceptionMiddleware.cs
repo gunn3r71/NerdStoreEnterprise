@@ -1,8 +1,8 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using NerdStoreEnterprise.WebApp.Mvc.Exceptions;
+using Refit;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Extensions
 {
@@ -23,19 +23,27 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Extensions
             }
             catch (CustomHttpResponseException ex)
             {
-                HandleRequestException(context, ex);
+                HandleRequestException(context, ex.StatusCode);
+            }
+            catch (ValidationApiException ex)
+            {
+                HandleRequestException(context, ex.StatusCode);
+            }
+            catch (ApiException ex)
+            {
+                HandleRequestException(context, ex.StatusCode);
             }
         }
 
-        private static void HandleRequestException(HttpContext context, CustomHttpResponseException exception)
+        private static void HandleRequestException(HttpContext context, HttpStatusCode statusCode)
         {
-            if (exception.StatusCode is HttpStatusCode.Unauthorized)
+            if (statusCode is HttpStatusCode.Unauthorized)
             {
                 context.Response.Redirect($"/login?ReturnUrl={context.Request.Path}");
                 return;
             }
 
-            context.Response.StatusCode = (int) exception.StatusCode;
+            context.Response.StatusCode = (int) statusCode;
         }
     }
 }
