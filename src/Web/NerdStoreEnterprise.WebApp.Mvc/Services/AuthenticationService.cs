@@ -13,11 +13,8 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Services
     {
         private readonly HttpClient _httpClient;
 
-        public AuthenticationService(HttpClient httpClient,
-                                     IOptions<ServicesUrls> serviceUrls)
+        public AuthenticationService(HttpClient httpClient)
         {
-            httpClient.BaseAddress = new Uri(serviceUrls.Value.AuthenticationUrl);
-
             _httpClient = httpClient;
         }
 
