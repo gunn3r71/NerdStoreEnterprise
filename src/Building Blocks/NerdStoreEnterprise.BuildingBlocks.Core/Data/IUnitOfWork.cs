@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace NerdStoreEnterprise.BuildingBlocks.Core.DomainObjects
+namespace NerdStoreEnterprise.BuildingBlocks.Core.Data
 {
     public interface IUnitOfWork
     {

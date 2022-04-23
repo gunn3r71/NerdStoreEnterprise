@@ -2,14 +2,14 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NerdStoreEnterprise.BuildingBlocks.Core.Data;
-using NerdStoreEnterprise.BuildingBlocks.Core.DomainObjects;
+using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.EF;
 using NerdStoreEnterprise.Services.Catalog.API.Models;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Data
 {
-    public class CatalogContext : DbContext, IUnitOfWork
+    public class CatalogDbContext : DbContext, IUnitOfWork
     {
-        public CatalogContext(DbContextOptions<CatalogContext> options) : base(options)
+        public CatalogDbContext(DbContextOptions<CatalogDbContext> options) : base(options)
         {
         }
 
@@ -17,15 +17,9 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            ConfigureUnmappedStrings(modelBuilder);
+            modelBuilder.ConfigureUnmappedStrings();
 
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogContext).Assembly);
-        }
-
-        private static void ConfigureUnmappedStrings(ModelBuilder modelBuilder)
-        {
-            foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
-                property.SetColumnType("varchar(100)");
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogDbContext).Assembly);
         }
 
         public async Task<bool> CommitAsync() => 
