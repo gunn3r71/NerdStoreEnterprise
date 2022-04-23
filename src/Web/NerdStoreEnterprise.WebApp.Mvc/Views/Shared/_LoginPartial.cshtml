@@ -5,7 +5,9 @@
     @if (_appUser.IsAuthenticated())
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" title="Manage">Olá @_appUser.GetUserEmail()</a>
+            <a class="nav-link text-dark" title="Manage">
+                <img class="icon icon-sm rounded-circle" src="https://s.gravatar.com/avatar/@this.HashEmailForGravatar(_appUser.GetUserEmail())?d=mm&s=50" alt="User profile images"/>
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Sair</a>

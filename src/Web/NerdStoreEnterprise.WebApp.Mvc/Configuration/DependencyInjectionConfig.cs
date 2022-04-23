@@ -24,18 +24,18 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
             services.RegisterHttpClient("Catalog", servicesUrls.CatalogUrl)
                 .AddTypedClient(Refit.RestService.For<ICatalogService>)
                 .AddPolicyHandler(EnableWaitAndRetryPolicy())
-                .AddTransientHttpErrorPolicy(policy => policy.CircuitBreakerAsync(20, TimeSpan.FromSeconds(30)));
+                .AddTransientHttpErrorPolicy(policy => policy.CircuitBreakerAsync(2, TimeSpan.FromSeconds(30)));
 
             services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<IUser, AspNetUser>();
         }
 
-        private static IHttpClientBuilder RegisterHttpClient(this IServiceCollection services, string httpClientName, string url) =>
+        private static IHttpClientBuilder RegisterHttpClient(this IServiceCollection services, string httpClientName,
+            string url) =>
             services.AddHttpClient(httpClientName, options =>
                 {
                     options.BaseAddress = new Uri($"{url}/api/v1");
-                    options.Timeout = TimeSpan.FromSeconds(30);
                 })
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
     }
