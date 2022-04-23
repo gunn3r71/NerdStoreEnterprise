@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using NerdStoreEnterprise.WebApp.Mvc.Exceptions;
+using Polly.CircuitBreaker;
 using Refit;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Extensions
@@ -33,8 +34,12 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Extensions
             {
                 HandleRequestException(context, ex.StatusCode);
             }
+            catch (BrokenCircuitException)
+            {
+                HandleCircuitBreakerExceptionAsync(context);
+            }
         }
-
+        
         private static void HandleRequestException(HttpContext context, HttpStatusCode statusCode)
         {
             if (statusCode is HttpStatusCode.Unauthorized)
@@ -45,5 +50,11 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Extensions
 
             context.Response.StatusCode = (int) statusCode;
         }
+        
+        private static void HandleCircuitBreakerExceptionAsync(HttpContext context)
+        {
+            context.Response.Redirect("/system-unavailable");
+        }
+
     }
 }

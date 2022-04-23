@@ -39,5 +39,19 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
 
             return View("Error", model);
         }
+
+        [AllowAnonymous]
+        [Route("system-unavailable")]
+        public IActionResult SystemUnavailable()
+        {
+            var model = new ErrorViewModel
+            {
+                Title = "System Unavailable",
+                Description = "The system is temporarily unavailable, this can happen due to user overload.",
+                Status = (int) HttpStatusCode.InternalServerError
+            };
+            
+            return View("Error", model);
+        }
     }
 }

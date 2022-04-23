@@ -6,7 +6,7 @@ using NerdStoreEnterprise.WebApp.Mvc.Extensions;
 using NerdStoreEnterprise.WebApp.Mvc.Services;
 using NerdStoreEnterprise.WebApp.Mvc.Services.Handlers;
 using Polly;
-using Polly.Extensions.Http;
+using static NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Polly.PollyExtensions;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
 {
@@ -21,27 +21,17 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
 
             services.AddHttpClient<IAuthenticationService, AuthenticationService>();
 
-            var retryWaitPolicy = HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .WaitAndRetryAsync(3, (retryAttempt) => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), 
-                    (outcome, timespan, retryCount, context) =>
-                    {
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.WriteLine($"trying for the {retryCount} time");
-                        Console.ForegroundColor = ConsoleColor.White;
-                    });
-
-            services.RegisterHttpClient("catalog", servicesUrls.CatalogUrl)
+            services.RegisterHttpClient("Catalog", servicesUrls.CatalogUrl)
                 .AddTypedClient(Refit.RestService.For<ICatalogService>)
-                .AddPolicyHandler(retryWaitPolicy);
+                .AddPolicyHandler(EnableWaitAndRetryPolicy())
+                .AddTransientHttpErrorPolicy(policy => policy.CircuitBreakerAsync(20, TimeSpan.FromSeconds(30)));
 
             services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<IUser, AspNetUser>();
         }
 
-        private static IHttpClientBuilder RegisterHttpClient(this IServiceCollection services, string httpClientName,
-            string url) =>
+        private static IHttpClientBuilder RegisterHttpClient(this IServiceCollection services, string httpClientName, string url) =>
             services.AddHttpClient(httpClientName, options =>
                 {
                     options.BaseAddress = new Uri($"{url}/api/v1");
