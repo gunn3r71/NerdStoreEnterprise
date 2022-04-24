@@ -11,12 +11,12 @@ namespace NerdStoreEnterprise.Services.Client.API.Configuration
         {
             services.AddDbContext<ClientsDbContext>(o =>
             {
-                var connectionString = configuration.GetConnectionString("ClientServiceConnection");
+                var connectionString = configuration.GetConnectionString("ClientsServiceConnection");
 
                 o.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), x =>
                 {
                     x.EnableRetryOnFailure(3);
-                    x.MigrationsHistoryTable("ClientMigrations");
+                    x.MigrationsHistoryTable("ClientsMigrations");
                     x.CommandTimeout(15);
                 });
             });

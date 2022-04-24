@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using NerdStoreEnterprise.BuildingBlocks.Core.Data;
 using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.EF;
 using NerdStoreEnterprise.Services.Catalog.API.Models;
+using System.Threading.Tasks;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Data
 {
@@ -22,7 +21,6 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Data
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogDbContext).Assembly);
         }
 
-        public async Task<bool> CommitAsync() => 
-            await base.SaveChangesAsync() > 0;
+        public async Task<bool> CommitAsync() => await base.SaveChangesAsync() > 0;
     }
 }

@@ -5,12 +5,11 @@ using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.EF;
 
 namespace NerdStoreEnterprise.Services.Client.API.Data
 {
-    public sealed class ClientsDbContext : DbContext, IUnitOfWork
+    public class ClientsDbContext : DbContext, IUnitOfWork
     {
         public ClientsDbContext(DbContextOptions<ClientsDbContext> options) : base(options)
         {
-            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-            ChangeTracker.AutoDetectChangesEnabled = false;
+            DisableQueryTrackingBehaviorAndChangesDetector();
         }
 
         public DbSet<Models.Client> Clients { get; set; }
@@ -24,6 +23,12 @@ namespace NerdStoreEnterprise.Services.Client.API.Data
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ClientsDbContext).Assembly);
         }
 
-        public async Task<bool> CommitAsync() => await SaveChangesAsync() > 0;
+        public async Task<bool> CommitAsync() => await base.SaveChangesAsync() > 0;
+
+        private void DisableQueryTrackingBehaviorAndChangesDetector()
+        {
+            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            ChangeTracker.AutoDetectChangesEnabled = false;
+        }
     }
 }

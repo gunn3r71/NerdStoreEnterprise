@@ -26,5 +26,12 @@ namespace NerdStoreEnterprise.Services.Client.API.Models
         public void AssignAddress(Address address) => Address = address;
 
         public void ChangeEmail(string email) => Email = new Email(email);
+
+        public void Delete()
+        {
+            if (Deleted) throw new InvalidOperationException("User is already marked as deleted.");
+
+            Deleted = true;
+        }
     }
 }

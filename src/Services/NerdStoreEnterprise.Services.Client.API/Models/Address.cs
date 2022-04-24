@@ -9,7 +9,7 @@ namespace NerdStoreEnterprise.Services.Client.API.Models
         {
         }
         
-        public Address(string streetName, string buildingNumber, string addressComplement, string zipCode, string city, string state)
+        public Address(string streetName, string buildingNumber, string addressComplement, string zipCode, string city, string state) : this()
         {
             StreetName = streetName;
             BuildingNumber = buildingNumber;
