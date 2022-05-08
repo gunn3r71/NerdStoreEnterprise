@@ -21,7 +21,7 @@ namespace NerdStoreEnterprise.Services.Client.API.Models
         public Email Email { get; private set; }
         public Cpf Cpf { get; private set; }
         public bool Deleted { get; private set; }
-        public Address Address { get; private set; }
+        public Address Address { get; protected set; }
 
         public void AssignAddress(Address address) => Address = address;
 

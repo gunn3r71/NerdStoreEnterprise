@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NerdStoreEnterprise.BuildingBlocks.Core.Data;
-using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.EF;
 using NerdStoreEnterprise.Services.Catalog.API.Models;
 using System.Threading.Tasks;
+using NerdStoreEnterprise.BuildingBlocks.Core.Data;
+using NerdStoreEnterprise.BuildingBlocks.Services.Core.EF;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Data
 {

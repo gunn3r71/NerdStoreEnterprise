@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core
@@ -26,10 +25,11 @@ namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core
         /// <param name="args">Arguments passed by terminal</param>
         /// <param name="env">Current environment</param>
         /// <param name="contentRootPath">Current content root path</param>
+        /// <param name="useUserSecrets">If true configures user secrets</param>
         /// <returns>Host Builder</returns>
         /// <exception cref="InvalidOperationException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        public static HostBuilder Create<TStartup>(string[] args, string env, string contentRootPath) where TStartup : class
+        public static HostBuilder Create<TStartup>(string[] args, string env, string contentRootPath, bool useUserSecrets = false) where TStartup : class
         {
             Console.Title = typeof(TStartup).Namespace ?? throw new InvalidOperationException("namespace not informed.");
 
@@ -43,7 +43,7 @@ namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core
                 .AddEnvironmentVariables()
                 .AddCommandLine(args);
 
-            //if (env.Contains("Development")) configuration.AddUserSecrets<TStartup>(); 
+            if (useUserSecrets) configuration.AddUserSecrets<TStartup>(); 
 
             var builder = WebHost.CreateDefaultBuilder(args)
                 .ConfigureLogging(x =>

@@ -8,35 +8,36 @@ namespace NerdStoreEnterprise.Services.Client.API.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Models.Client> builder)
         {
-            builder.HasKey(client => client.Id);
+            builder.ToTable("Clients");
 
-            builder.Property(client => client.Name)
+            builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Name)
+                .HasMaxLength(150)
+                .HasColumnType("VARCHAR(150)");
+
+            builder.Property(x => x.Deleted)
                 .IsRequired()
-                .HasMaxLength(120)
-                .HasColumnType("varchar(120)");
+                .HasDefaultValue(false);
 
-            builder.OwnsOne(client => client.Cpf, cpf =>
+            builder.OwnsOne(x => x.Cpf, c =>
             {
-                cpf.Property(x => x.Number)
+                c.Property(x => x.Number)
                     .IsRequired()
                     .HasMaxLength(Cpf.Length)
-                    .HasColumnName("Cpf")
-                    .HasColumnType($"varchar({Cpf.Length})");
+                    .HasColumnType($"VARCHAR({Cpf.Length})");
             });
 
-            builder.OwnsOne(client => client.Email, email =>
+            builder.OwnsOne(x => x.Email, c =>
             {
-                email.Property(x => x.Address)
+                c.Property(x => x.Address)
                     .IsRequired()
                     .HasMaxLength(Email.MaxLength)
-                    .HasColumnName("Email")
-                    .HasColumnType($"varchar({Email.MaxLength})");
+                    .HasColumnType($"VARCHAR({Email.MaxLength})");
             });
 
-            builder.HasOne(client => client.Address)
-                .WithOne(address => address.Client);
-
-            builder.ToTable("Clients");
+            builder.HasOne(x => x.Address)
+                .WithOne(x => x.Client);
         }
     }
 }

@@ -8,39 +8,34 @@ namespace NerdStoreEnterprise.Services.Client.API.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Address> builder)
         {
-            builder.HasKey(address => address.Id);
-            
-            builder.Property(address => address.StreetName)
+            builder.ToTable("Adresses");
+
+            builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.StreetName)
                 .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnType("varchar(255)");
-            
-            builder.Property(address => address.BuildingNumber)
+                .HasMaxLength(200)
+                .HasColumnType("VARCHAR(200)");
+
+            builder.Property(x => x.AddressComplement)
+                .IsRequired()
+                .HasMaxLength(200)
+                .HasColumnType("VARCHAR(200)");
+
+            builder.Property(x => x.BuildingNumber)
                 .IsRequired()
                 .HasMaxLength(10)
-                .HasColumnType("varchar(10)");
-            
-            builder.Property(address => address.AddressComplement)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnType("varchar(255)");
-            
-            builder.Property(address => address.ZipCode)
-                .IsRequired()
-                .HasMaxLength(8)
-                .HasColumnType("varchar(8)");
-            
-            builder.Property(address => address.City)
+                .HasColumnType("VARCHAR(10)");
+
+            builder.Property(x => x.City)
                 .IsRequired()
                 .HasMaxLength(100)
-                .HasColumnType("varchar(100)");
-            
-            builder.Property(address => address.State)
-                .IsRequired()
-                .HasMaxLength(2)
-                .HasColumnType("varchar(2)");
+                .HasColumnType("VARCHAR(100)");
 
-            builder.ToTable("Addresses");
+            builder.Property(x => x.State)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnType("VARCHAR(100)");
         }
     }
 }

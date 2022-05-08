@@ -5,10 +5,10 @@ namespace NerdStoreEnterprise.Services.Client.API.Models
 {
     public class Address : Entity
     {
-        protected Address()
+        private Address()
         {
         }
-        
+
         public Address(string streetName, string buildingNumber, string addressComplement, string zipCode, string city, string state) : this()
         {
             StreetName = streetName;
@@ -18,7 +18,7 @@ namespace NerdStoreEnterprise.Services.Client.API.Models
             City = city;
             State = state;
         }
-        
+
         public string StreetName { get; private set; }
         public string BuildingNumber { get; private set; }
         public string AddressComplement { get; private set; }

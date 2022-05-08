@@ -12,7 +12,7 @@ namespace NerdStoreEnterprise.Services.Client.API.Configuration
             services.AddDbContext<ClientsDbContext>(o =>
             {
                 var connectionString = configuration.GetConnectionString("ClientsServiceConnection");
-
+            
                 o.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), x =>
                 {
                     x.EnableRetryOnFailure(3);
