@@ -1,13 +1,13 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace NerdStoreEnterprise.BuildingBlocks.Core.DomainObjects
+namespace NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects
 {
     public class Email : IValueObject
     {
         public const int MaxLength = 254;
         public const int MinLenght = 5;
 
-        protected Email()
+        private Email()
         {
         }
         
@@ -23,7 +23,7 @@ namespace NerdStoreEnterprise.BuildingBlocks.Core.DomainObjects
             if (email is {Length: > MaxLength} or {Length: < MinLenght})
                 return false;
             
-            var emailRegex = new Regex(@"/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i");
+            var emailRegex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
 
             return emailRegex.IsMatch(email);
         }

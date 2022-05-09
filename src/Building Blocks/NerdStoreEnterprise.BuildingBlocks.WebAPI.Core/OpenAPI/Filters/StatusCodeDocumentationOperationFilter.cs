@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Reflection;
 
-namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.OpenAPI.Filters
+namespace NerdStoreEnterprise.BuildingBlocks.Services.Core.OpenAPI.Filters
 {
     public class StatusCodeDocumentationOperationFilter : IOperationFilter
     {

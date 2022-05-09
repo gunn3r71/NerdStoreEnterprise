@@ -4,7 +4,8 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity.Authorization;
+using NerdStoreEnterprise.BuildingBlocks.Services.Core.Controllers;
+using NerdStoreEnterprise.BuildingBlocks.Services.Core.Identity.Authorization;
 using NerdStoreEnterprise.Services.Catalog.API.Models;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Controllers
@@ -12,7 +13,7 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Controllers
     [Route("api/v1/[controller]")]
     [ApiController]
     [Authorize]
-    public class CatalogController : ControllerBase
+    public class CatalogController : BaseController
     {
         private readonly IProductRepository _productRepository;
 

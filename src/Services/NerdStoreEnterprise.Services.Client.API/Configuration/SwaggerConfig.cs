@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.OpenAPI.Filters;
+using NerdStoreEnterprise.BuildingBlocks.Services.Core.OpenAPI.Filters;
 
 namespace NerdStoreEnterprise.Services.Client.API.Configuration
 {

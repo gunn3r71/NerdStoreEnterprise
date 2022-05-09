@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity;
+using NerdStoreEnterprise.BuildingBlocks.Services.Core.Identity;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Configuration
 {

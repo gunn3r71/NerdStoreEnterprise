@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity;
+using NerdStoreEnterprise.BuildingBlocks.Services.Core.Identity;
 
 namespace NerdStoreEnterprise.Services.Client.API.Configuration
 {
@@ -11,6 +12,8 @@ namespace NerdStoreEnterprise.Services.Client.API.Configuration
         public static void AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddCustomDatabase(configuration);
+
+            services.AddMediatR(typeof(Startup));
 
             services.RegisterServices();
 

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 
-namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity.Authorization
+namespace NerdStoreEnterprise.BuildingBlocks.Services.Core.Identity.Authorization
 {
     public class ClaimsAuthorizeAttribute : TypeFilterAttribute
     {

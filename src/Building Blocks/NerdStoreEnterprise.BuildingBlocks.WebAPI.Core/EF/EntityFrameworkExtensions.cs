@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Messages;
+using ValidationResult = FluentValidation.Results.ValidationResult;
 
 namespace NerdStoreEnterprise.BuildingBlocks.Services.Core.EF
 {
@@ -23,6 +26,16 @@ namespace NerdStoreEnterprise.BuildingBlocks.Services.Core.EF
         {
             foreach (var relationShip in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
                 relationShip.DeleteBehavior = DeleteBehavior.SetNull;
+        }
+
+        /// <summary>
+        /// Will ignore domain events when trying to persist data
+        /// </summary>
+        /// <param name="builder"></param>
+        public static void IgnoreDomainMessageItems(this ModelBuilder builder)
+        {
+            builder.Ignore<ValidationResult>();
+            builder.Ignore<Event>();
         }
     }
 }

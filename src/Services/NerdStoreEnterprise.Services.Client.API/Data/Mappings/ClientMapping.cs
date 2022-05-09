@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NerdStoreEnterprise.BuildingBlocks.Core.DomainObjects;
+using NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects;
 
 namespace NerdStoreEnterprise.Services.Client.API.Data.Mappings
 {

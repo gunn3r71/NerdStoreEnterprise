@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Net;
+﻿using System.Net;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using NerdStoreEnterprise.WebApp.Mvc.Models.Errors;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Controllers

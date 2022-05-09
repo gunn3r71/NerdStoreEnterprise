@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
@@ -10,6 +10,7 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.14" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" version="5.0.14" />
 		<PackageReference Include="Microsoft.Extensions.Http.Polly" Version="5.0.1" />
+		<PackageReference Include="FluentValidation" Version="11.0.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
 	</ItemGroup>
 
@@ -20,6 +21,10 @@
 
 	<ItemGroup>
 	  <Compile Remove="Polly\RetryPolicyConfig.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\NerdStoreEnterprise.BuildingBlocks.Core\Shared.csproj" />
 	</ItemGroup>
 
 </Project>

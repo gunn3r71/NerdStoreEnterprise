@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity
+namespace NerdStoreEnterprise.BuildingBlocks.Services.Core.Identity
 {
     public static class AuthenticationConfig
     {

@@ -3,7 +3,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity.Authorization
+namespace NerdStoreEnterprise.BuildingBlocks.Services.Core.Identity.Authorization
 {
     public class RequirementFilter : IAuthorizationFilter
     {

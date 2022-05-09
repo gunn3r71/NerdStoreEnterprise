@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NerdStoreEnterprise.Services.Catalog.API.Models;
 using System.Threading.Tasks;
-using NerdStoreEnterprise.BuildingBlocks.Core.Data;
+using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Data;
 using NerdStoreEnterprise.BuildingBlocks.Services.Core.EF;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Data
@@ -14,11 +14,13 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Data
 
         public DbSet<Product> Products { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            modelBuilder.ConfigureUnmappedStrings();
+            builder.IgnoreDomainMessageItems();
 
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogDbContext).Assembly);
+            builder.ConfigureUnmappedStrings();
+
+            builder.ApplyConfigurationsFromAssembly(typeof(CatalogDbContext).Assembly);
         }
 
         public async Task<bool> CommitAsync() => await base.SaveChangesAsync() > 0;

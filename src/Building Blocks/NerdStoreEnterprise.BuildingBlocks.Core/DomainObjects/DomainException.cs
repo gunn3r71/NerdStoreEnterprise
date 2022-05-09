@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NerdStoreEnterprise.BuildingBlocks.Core.DomainObjects
+namespace NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects
 {
     public class DomainException : Exception
     {

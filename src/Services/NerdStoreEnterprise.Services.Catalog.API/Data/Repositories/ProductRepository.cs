@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using NerdStoreEnterprise.BuildingBlocks.Core.Data;
+using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Data;
 using NerdStoreEnterprise.Services.Catalog.API.Models;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Data.Repositories

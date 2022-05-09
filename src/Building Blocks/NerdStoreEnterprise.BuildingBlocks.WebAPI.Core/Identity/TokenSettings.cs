@@ -1,4 +1,4 @@
-﻿namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity
+﻿namespace NerdStoreEnterprise.BuildingBlocks.Services.Core.Identity
 {
     public class TokenSettings
     {

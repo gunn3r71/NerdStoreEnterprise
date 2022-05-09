@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Mvc;
-using NerdStoreEnterprise.WebApp.Mvc.Models.AuthenticationResponse;
-using NerdStoreEnterprise.WebApp.Mvc.Models.Users;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using NerdStoreEnterprise.WebApp.Mvc.Models.AuthenticationResponse;
+using NerdStoreEnterprise.WebApp.Mvc.Models.Users;
 using IAuthenticationService = NerdStoreEnterprise.WebApp.Mvc.Services.IAuthenticationService;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Controllers

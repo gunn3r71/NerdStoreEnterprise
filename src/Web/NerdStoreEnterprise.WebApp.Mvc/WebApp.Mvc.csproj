@@ -3,7 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
-    <UserSecretsId>46b1ccdd-e55a-40d8-a218-c1af26e002fc</UserSecretsId>
+	<RootNamespace>NerdStoreEnterprise.WebApp.Mvc</RootNamespace>
+	<UserSecretsId>46b1ccdd-e55a-40d8-a218-c1af26e002fc</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..</DockerfileContext>
   </PropertyGroup>

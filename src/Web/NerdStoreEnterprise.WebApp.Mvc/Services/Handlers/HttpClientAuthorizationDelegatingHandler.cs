@@ -1,8 +1,8 @@
-﻿using NerdStoreEnterprise.WebApp.Mvc.Extensions;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using NerdStoreEnterprise.WebApp.Mvc.Extensions;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Services.Handlers
 {

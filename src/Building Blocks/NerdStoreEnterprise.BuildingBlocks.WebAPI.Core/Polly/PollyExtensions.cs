@@ -4,7 +4,7 @@ using Polly;
 using Polly.Extensions.Http;
 using Polly.Retry;
 
-namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Polly
+namespace NerdStoreEnterprise.BuildingBlocks.Services.Core.Polly
 {
     public static class PollyExtensions
     {

@@ -1,5 +1,5 @@
 ﻿using System;
-using NerdStoreEnterprise.BuildingBlocks.Core.DomainObjects;
+using NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects;
 
 namespace NerdStoreEnterprise.Services.Client.API.Models
 {

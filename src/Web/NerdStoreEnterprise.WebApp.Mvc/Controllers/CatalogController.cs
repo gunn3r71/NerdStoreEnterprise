@@ -1,7 +1,7 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NerdStoreEnterprise.WebApp.Mvc.Services;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Controllers

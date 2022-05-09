@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Messages;
 
-namespace NerdStoreEnterprise.BuildingBlocks.Core.DomainObjects
+namespace NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects
 {
     public abstract class Entity
     {
@@ -15,6 +17,20 @@ namespace NerdStoreEnterprise.BuildingBlocks.Core.DomainObjects
         }
 
         public Guid Id { get; }
+
+        private List<Event> _events;
+        
+        public IReadOnlyList<Event> Events => _events?.AsReadOnly();
+
+        public void AddEvent(Event ev)
+        {
+            _events ??= new List<Event>();
+            _events.Add(ev);
+        }
+
+        public void RemoveEvent(Event ev) => _events?.Remove(ev);
+
+        public void ClearEvents() => _events?.Clear();
 
         public override bool Equals(object obj)
         {

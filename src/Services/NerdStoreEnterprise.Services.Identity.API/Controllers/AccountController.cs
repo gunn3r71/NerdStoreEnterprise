@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using NerdStoreEnterprise.BuildingBlocks.Services.Core.Identity;
+using NerdStoreEnterprise.Services.Identity.API.Models;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using NerdStoreEnterprise.Services.Identity.API.Models;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity;
+using NerdStoreEnterprise.BuildingBlocks.Services.Core.Controllers;
 
 namespace NerdStoreEnterprise.Services.Identity.API.Controllers
 {

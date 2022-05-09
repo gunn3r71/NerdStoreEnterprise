@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity;
-using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.OpenAPI.Filters;
+using NerdStoreEnterprise.BuildingBlocks.Services.Core.Identity;
 
 namespace NerdStoreEnterprise.Services.Identity.API.Configuration
 {

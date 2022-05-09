@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Hosting;
-using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using NerdStoreEnterprise.BuildingBlocks.Services.Core;
 
 namespace NerdStoreEnterprise.Services.Payment.API
 {

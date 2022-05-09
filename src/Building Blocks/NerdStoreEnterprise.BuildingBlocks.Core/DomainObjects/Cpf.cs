@@ -1,6 +1,6 @@
-﻿using NerdStoreEnterprise.BuildingBlocks.Core.Tools;
+﻿using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Tools;
 
-namespace NerdStoreEnterprise.BuildingBlocks.Core.DomainObjects
+namespace NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects
 {
     public class Cpf : IValueObject
     {

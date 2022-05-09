@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
-namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Identity.Authorization
+namespace NerdStoreEnterprise.BuildingBlocks.Services.Core.Identity.Authorization
 {
     public static class CustomAuthorization
     {

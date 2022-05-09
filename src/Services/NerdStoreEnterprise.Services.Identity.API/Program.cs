@@ -1,8 +1,8 @@
-using NerdStoreEnterprise.BuildingBlocks.WebAPI.Core;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
+using NerdStoreEnterprise.BuildingBlocks.Services.Core;
 
 namespace NerdStoreEnterprise.Services.Identity.API
 {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace NerdStoreEnterprise.BuildingBlocks.WebAPI.Core
+namespace NerdStoreEnterprise.BuildingBlocks.Services.Core
 {
     public interface IServiceHost
     {

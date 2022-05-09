@@ -6,7 +6,7 @@ using NerdStoreEnterprise.WebApp.Mvc.Extensions;
 using NerdStoreEnterprise.WebApp.Mvc.Services;
 using NerdStoreEnterprise.WebApp.Mvc.Services.Handlers;
 using Polly;
-using static NerdStoreEnterprise.BuildingBlocks.WebAPI.Core.Polly.PollyExtensions;
+using static NerdStoreEnterprise.BuildingBlocks.Services.Core.Polly.PollyExtensions;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
 {

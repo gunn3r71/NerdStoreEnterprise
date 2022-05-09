@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace NerdStoreEnterprise.BuildingBlocks.Core.Tools
+namespace NerdStoreEnterprise.BuildingBlocks.Core.Shared.Tools
 {
     public static class StringExtensions
     {
