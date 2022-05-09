@@ -13,7 +13,16 @@
                 <hr />
                 
                 <vc:summary></vc:summary>
-
+                <div class="form-group">
+                    <label asp-for="FullName"></label>
+                    <input asp-for="FullName" class="form-control"/>
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cpf"></label>
+                    <input asp-for="Cpf" class="form-control"/>
+                    <span asp-validation-for="Cpf" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="Username"></label>
                     <input asp-for="Username" class="form-control" />

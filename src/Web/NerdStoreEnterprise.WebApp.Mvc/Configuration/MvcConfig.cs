@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
@@ -17,6 +18,12 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
             services.RegisterServices(configuration);
 
             services.Configure<ServicesUrls>(configuration.GetSection("ServicesUrls"));
+
+            services.AddFluentValidation(x =>
+            {
+                x.RegisterValidatorsFromAssembly(typeof(Startup).Assembly);
+                x.LocalizationEnabled = false;
+            });
 
             services.AddControllersWithViews();
         }

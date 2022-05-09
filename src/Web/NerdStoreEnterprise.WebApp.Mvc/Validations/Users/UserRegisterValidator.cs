@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects;
 using NerdStoreEnterprise.WebApp.Mvc.Models.Users;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Validations.Users
@@ -7,6 +8,17 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Validations.Users
     {
         public UserRegisterValidator()
         {
+            RuleFor(x => x.FullName)
+                .NotEmpty()
+                .NotNull()
+                .MaximumLength(150);
+
+            RuleFor(x => x.Cpf)
+                .NotEmpty()
+                .NotNull()
+                .Must(HaveAValidCpf)
+                .WithMessage("CPF with invalid format.");
+
             RuleFor(x => x.Username)
                 .NotEmpty()
                 .NotNull()
@@ -32,5 +44,9 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Validations.Users
                 if (x.Password != x.ConfirmPassword) validationContext.AddFailure(nameof(x.ConfirmPassword), "The passwords entered are not the same.");
             });
         }
+
+
+        private static bool HaveAValidCpf(string cpf) =>
+            Cpf.IsValid(cpf);
     }
 }
