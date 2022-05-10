@@ -11,8 +11,6 @@ using NerdStoreEnterprise.Services.Catalog.API.Models;
 namespace NerdStoreEnterprise.Services.Catalog.API.Controllers
 {
     [Route("api/v1/[controller]")]
-    [ApiController]
-    [Authorize]
     public class CatalogController : BaseController
     {
         private readonly IProductRepository _productRepository;

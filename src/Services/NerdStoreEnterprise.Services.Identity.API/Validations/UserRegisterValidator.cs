@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects;
 using NerdStoreEnterprise.Services.Identity.API.Models;
 
 namespace NerdStoreEnterprise.Services.Identity.API.Validations
@@ -7,6 +8,17 @@ namespace NerdStoreEnterprise.Services.Identity.API.Validations
     {
         public UserRegisterValidator()
         {
+            RuleFor(x => x.Name)
+                .NotEmpty()
+                .NotNull()
+                .MaximumLength(150);
+
+            RuleFor(x => x.Cpf)
+                .Must(HaveAValidCpf)
+                .NotNull()
+                .NotEmpty();
+
+
             RuleFor(x => x.Username)
                 .NotEmpty()
                 .NotNull()
@@ -15,7 +27,7 @@ namespace NerdStoreEnterprise.Services.Identity.API.Validations
             RuleFor(x => x.Email)
                 .NotEmpty()
                 .NotNull()
-                .EmailAddress();
+                .Must(HaveAValidEmail);
 
             RuleFor(x => x.Password)
                 .NotEmpty()
@@ -32,5 +44,11 @@ namespace NerdStoreEnterprise.Services.Identity.API.Validations
                 if (x.Password != x.ConfirmPassword) validationContext.AddFailure(nameof(x.ConfirmPassword), "The passwords entered are not the same.");
             });
         }
+
+        private static bool HaveAValidCpf(string cpf) =>
+            Cpf.IsValid(cpf);
+
+        private static bool HaveAValidEmail(string email) =>
+            Email.IsValid(email);
     }
 }

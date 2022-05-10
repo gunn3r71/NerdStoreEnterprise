@@ -11,25 +11,33 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using EasyNetQ;
+using FluentValidation.Results;
+using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Messages.IntegrationEvents;
 using NerdStoreEnterprise.BuildingBlocks.Services.Core.Controllers;
+using NerdStoreEnterprise.BuildingBlocks.Services.Core.EventBus;
 
 namespace NerdStoreEnterprise.Services.Identity.API.Controllers
 {
     [Route("api/v1/account")]
-    [Authorize]
     public class AccountController : BaseController
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly TokenSettings _tokenSettings;
+        private IBus _bus;
 
         public AccountController(SignInManager<IdentityUser> signInManager,
                                  UserManager<IdentityUser> userManager,
-                                 IOptions<TokenSettings> tokenSettings)
+                                 IOptions<TokenSettings> tokenSettings,
+                                 IOptions<RabbitMq> rabbitMqConfig)
         {
-            _signInManager = signInManager;
-            _userManager = userManager;
+            _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _tokenSettings = tokenSettings.Value;
+
+            var rabbitMq = rabbitMqConfig.Value;
+            _bus = RabbitHutch.CreateBus($"host={rabbitMq.Host};virtualHost={rabbitMq.VHost};username={rabbitMq.User};password={rabbitMq.Password}");
         }
 
         [HttpPost("register")]
@@ -47,7 +55,12 @@ namespace NerdStoreEnterprise.Services.Identity.API.Controllers
 
             var result = await _userManager.CreateAsync(applicationUser, user.Password);
 
-            if (result.Succeeded) return CustomResponse(await GetTokenAsync(user.Username));
+            if (result.Succeeded)
+            {
+                var success = await RegisterClient(user);
+
+                return CustomResponse(await GetTokenAsync(user.Username));
+            }
 
             AddError(result.Errors.Select(x => x.Description));
 
@@ -132,5 +145,16 @@ namespace NerdStoreEnterprise.Services.Identity.API.Controllers
 
         private static long ToUnixEpochDate(DateTime date) =>
             (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
+
+        private async Task<ResponseMessage> RegisterClient(UserRegisterViewModel userModel)
+        {
+            var user = await _userManager.FindByNameAsync(userModel.Username);
+
+            var createdUserIntegrationEvent = new CreatedUserIntegrationEvent(Guid.Parse(user.Id), userModel.Name, user.Email, userModel.Cpf);
+
+            var success = await _bus.Rpc.RequestAsync<CreatedUserIntegrationEvent, ResponseMessage>(createdUserIntegrationEvent);
+
+            return success;
+        }
     }
 }

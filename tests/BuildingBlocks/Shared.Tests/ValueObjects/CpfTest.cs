@@ -8,6 +8,8 @@ namespace NerdStoreEnterprise.Tests.BuildingBlocks.Shared.UnitTests.ValueObjects
 {
     public class CpfTest
     {
+        #region Test data collections
+
         public static IEnumerable<object[]> ValidCpfNumber
         {
             get
@@ -69,6 +71,9 @@ namespace NerdStoreEnterprise.Tests.BuildingBlocks.Shared.UnitTests.ValueObjects
                 };
             }
         }
+
+        #endregion
+
 
         [Theory]
         [MemberData(nameof(ValidCpfNumber))]
