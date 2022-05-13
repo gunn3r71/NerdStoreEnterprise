@@ -62,7 +62,8 @@ namespace NerdStoreEnterprise.BuildingBlocks.MessageBus
             return _bus.Rpc.Respond(respond);
         }
 
-        public AwaitableDisposable<IDisposable> RespondAsync<TRequest, TResponse>(Func<TRequest, TResponse> respond)
+        public AwaitableDisposable<IDisposable> RespondAsync<TRequest, TResponse>(
+            Func<CreatedUserIntegrationEvent, Task<ResponseMessage>> respond)
         {
             TryConnect();
             return _bus.Rpc.RespondAsync(respond);

@@ -27,6 +27,7 @@ namespace NerdStoreEnterprise.BuildingBlocks.MessageBus
 
         IDisposable Respond<TRequest, TResponse>(Func<TRequest, TResponse> respond);
         
-        AwaitableDisposable<IDisposable> RespondAsync<TRequest, TResponse>(Func<TRequest, TResponse> respond);
+        AwaitableDisposable<IDisposable> RespondAsync<TRequest, TResponse>(
+            Func<CreatedUserIntegrationEvent, Task<ResponseMessage>> respond);
     }
 }

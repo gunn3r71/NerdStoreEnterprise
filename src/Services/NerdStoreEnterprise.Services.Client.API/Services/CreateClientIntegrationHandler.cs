@@ -8,28 +8,29 @@ using NerdStoreEnterprise.Services.Client.API.Application.Commands;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using NerdStoreEnterprise.BuildingBlocks.MessageBus;
 
 namespace NerdStoreEnterprise.Services.Client.API.Services
 {
     public class CreateClientIntegrationHandler : BackgroundService
     {
         private readonly IServiceProvider _serviceProvider;
-        private IBus _bus;
+        private readonly IMessageBus _bus;
 
-        public CreateClientIntegrationHandler(IServiceProvider serviceProvider)
+        public CreateClientIntegrationHandler(IServiceProvider serviceProvider, IMessageBus bus)
         {
             _serviceProvider = serviceProvider;
+            _bus = bus;
         }
 
         protected override Task ExecuteAsync(CancellationToken cancellationToken)
         {
-            _bus.Rpc.RespondAsync<CreatedUserIntegrationEvent, ResponseMessage>(async request => 
-                new ResponseMessage(await CreateClient(request)), cancellationToken);
+            _bus.RespondAsync<CreatedUserIntegrationEvent, ResponseMessage>(async request => await CreateClient(request));
 
             return Task.CompletedTask;
         }
 
-        private async Task<ValidationResult> CreateClient(CreatedUserIntegrationEvent message)
+        private async Task<ResponseMessage> CreateClient(CreatedUserIntegrationEvent message)
         {
             var createClientCommand = new CreateClientCommand(message.Id, message.Name, message.Email, message.Cpf);
 
@@ -38,7 +39,7 @@ namespace NerdStoreEnterprise.Services.Client.API.Services
             var mediator = scope.ServiceProvider.GetRequiredService<IMediatorHandler>();
             var success = await mediator.SendCommand(createClientCommand);
 
-            return success;
+            return new ResponseMessage(success);
         }
     }
 }
