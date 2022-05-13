@@ -8,6 +8,29 @@ namespace NerdStoreEnterprise.Tests.BuildingBlocks.Shared.UnitTests.ValueObjects
 {
     public class EmailTest
     {
+        [Theory]
+        [MemberData(nameof(ValidEmailAddresses))]
+        public void ShouldNotThrowDomainExceptionIfEmailIsValid(string emailAddress)
+        {
+            //Arrange
+            Action email = () => new Email(emailAddress);
+
+            //Act and Assert
+            email.Should().NotThrow<DomainException>();
+        }
+
+        [Theory]
+        [MemberData(nameof(InvalidEmailAddresses))]
+        public void ShouldThorwDomainExceptionIfEmailIsInvalid(string emailAddress)
+        {
+            //Arrange
+            Action email = () => new Email(emailAddress);
+
+            //Act and Assert
+            email.Should().Throw<DomainException>()
+                .WithMessage("The email provided is invalid.");
+        }
+
         #region Test data collections
 
         public static IEnumerable<object[]> ValidEmailAddresses
@@ -40,6 +63,7 @@ namespace NerdStoreEnterprise.Tests.BuildingBlocks.Shared.UnitTests.ValueObjects
                 };
             }
         }
+
         public static IEnumerable<object[]> InvalidEmailAddresses
         {
             get
@@ -72,28 +96,5 @@ namespace NerdStoreEnterprise.Tests.BuildingBlocks.Shared.UnitTests.ValueObjects
         }
 
         #endregion
-
-        [Theory]
-        [MemberData(nameof(ValidEmailAddresses))]
-        public void ShouldNotThrowDomainExceptionIfEmailIsValid(string emailAddress)
-        {
-            //Arrange
-            Action email = () => new Email(emailAddress);
-
-            //Act and Assert
-            email.Should().NotThrow<DomainException>();
-        }
-
-        [Theory]
-        [MemberData(nameof(InvalidEmailAddresses))]
-        public void ShouldThorwDomainExceptionIfEmailIsInvalid(string emailAddress)
-        {
-            //Arrange
-            Action email = () => new Email(emailAddress);
-
-            //Act and Assert
-            email.Should().Throw<DomainException>()
-                .WithMessage("The email provided is invalid.");
-        }
     }
 }

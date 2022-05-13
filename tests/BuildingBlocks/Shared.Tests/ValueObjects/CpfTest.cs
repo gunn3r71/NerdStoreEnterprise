@@ -8,6 +8,29 @@ namespace NerdStoreEnterprise.Tests.BuildingBlocks.Shared.UnitTests.ValueObjects
 {
     public class CpfTest
     {
+        [Theory]
+        [MemberData(nameof(ValidCpfNumber))]
+        public void ShouldNotThrowDomainExceptionIfCpfIsValid(string cpfNumber)
+        {
+            //Arrange
+            Action cpf = () => new Cpf(cpfNumber);
+
+            //Act and Assert
+            cpf.Should().NotThrow<DomainException>();
+        }
+
+        [Theory]
+        [MemberData(nameof(InvalidCpfNumbers))]
+        public void ShouldThorwDomainExceptionIfCpfIsInvalid(string cpfNumber)
+        {
+            //Arrange
+            Action cpf = () => new Cpf(cpfNumber);
+
+            //Act and Assert
+            cpf.Should().Throw<DomainException>()
+                .WithMessage("Invalid CPF.");
+        }
+
         #region Test data collections
 
         public static IEnumerable<object[]> ValidCpfNumber
@@ -73,29 +96,5 @@ namespace NerdStoreEnterprise.Tests.BuildingBlocks.Shared.UnitTests.ValueObjects
         }
 
         #endregion
-
-
-        [Theory]
-        [MemberData(nameof(ValidCpfNumber))]
-        public void ShouldNotThrowDomainExceptionIfCpfIsValid(string cpfNumber)
-        {
-            //Arrange
-            Action cpf = () => new Cpf(cpfNumber);
-
-            //Act and Assert
-            cpf.Should().NotThrow<DomainException>();
-        }
-
-        [Theory]
-        [MemberData(nameof(InvalidCpfNumbers))]
-        public void ShouldThorwDomainExceptionIfCpfIsInvalid(string cpfNumber)
-        {
-            //Arrange
-            Action cpf = () => new Cpf(cpfNumber);
-
-            //Act and Assert
-            cpf.Should().Throw<DomainException>()
-                .WithMessage("Invalid CPF.");
-        }
     }
 }
