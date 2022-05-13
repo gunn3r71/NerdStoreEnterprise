@@ -22,7 +22,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\src\Building Blocks\Core\Shared.csproj"/>
-        <ProjectReference Include="..\..\..\src\Building Blocks\NerdStoreEnterprise.BuildingBlocks.Core\Shared.csproj"/>
     </ItemGroup>
 
 </Project>

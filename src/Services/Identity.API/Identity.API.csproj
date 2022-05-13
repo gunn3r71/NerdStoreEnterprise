@@ -32,9 +32,6 @@
     <ItemGroup>
         <ProjectReference Include="..\..\Building Blocks\Core\Shared.csproj"/>
         <ProjectReference Include="..\..\Building Blocks\MessageBus\MessageBus.csproj"/>
-        <ProjectReference Include="..\..\Building Blocks\NerdStoreEnterprise.BuildingBlocks.Core\Shared.csproj"/>
-        <ProjectReference Include="..\..\Building Blocks\NerdStoreEnterprise.BuildingBlocks.MessageBus\MessageBus.csproj"/>
-        <ProjectReference Include="..\..\Building Blocks\NerdStoreEnterprise.BuildingBlocks.WebAPI.Core\Core.csproj"/>
         <ProjectReference Include="..\..\Building Blocks\WebAPI.Core\Core.csproj"/>
     </ItemGroup>
 
