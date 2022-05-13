@@ -1,20 +1,20 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Mediator;
-using NerdStoreEnterprise.Services.Client.API.Data;
-using NerdStoreEnterprise.Services.Client.API.Data.Repositories;
-using NerdStoreEnterprise.Services.Client.API.Infrastructure.Services;
-using NerdStoreEnterprise.Services.Client.API.Models;
+using NerdStoreEnterprise.Services.Customer.API.Data;
+using NerdStoreEnterprise.Services.Customer.API.Data.Repositories;
+using NerdStoreEnterprise.Services.Customer.API.Infrastructure.Services;
+using NerdStoreEnterprise.Services.Customer.API.Models;
 
-namespace NerdStoreEnterprise.Services.Client.API.Configuration
+namespace NerdStoreEnterprise.Services.Customer.API.Configuration
 {
     public static class DependencyInjectionConfig
     {
-        public static void RegisterServices(this IServiceCollection services)
+        public static void ResolveDependencies(this IServiceCollection services)
         {
             services.AddScoped<IMediatorHandler, MediatorHandler>();
             
-            services.AddScoped<IClientRepository, ClientRepository>();
-            services.AddScoped<ClientsDbContext>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<CustomersDbContext>();
 
             services.AddSingleton<IEmailService, EmailService>();
         }

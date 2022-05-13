@@ -2,8 +2,8 @@
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Models.Errors
 {
-    public record ErrorMessagesViewModel
+    public class ErrorMessagesViewModel
     {
-        public List<string> Messages { get; set; }
+        public List<string> Messages { get; set; } = new();
     }
 }

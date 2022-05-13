@@ -17,7 +17,11 @@ namespace NerdStoreEnterprise.Services.Identity.API.Configuration
 
             services.AddCustomAuthentication(configuration);
 
+            services.ResolveDependencies();
+
             services.AddMessageBusConfiguration(configuration);
+
+            services.AddCustomLogging(configuration);
 
             services.AddControllers()
                 .AddFluentValidation(x =>

@@ -1,11 +1,11 @@
 ﻿using System;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Messages;
 
-namespace NerdStoreEnterprise.Services.Client.API.Application.Events
+namespace NerdStoreEnterprise.Services.Customer.API.Application.Events
 {
-    public class CreatedClientEvent : Event
+    public class CreatedCustomerEvent : Event
     {
-        public CreatedClientEvent(Guid id, string name, string email, string cpf)
+        public CreatedCustomerEvent(Guid id, string name, string email, string cpf)
         {
             AggregateId = id;
             Id = id;

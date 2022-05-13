@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace NerdStoreEnterprise.Services.Client.API.Data.ClientsMigrations
+namespace NerdStoreEnterprise.Services.Customer.API.Data.ClientsMigrations
 {
     public partial class Initial : Migration
     {

@@ -1,4 +1,4 @@
-﻿namespace NerdStoreEnterprise.Services.Client.API.Infrastructure.Services
+﻿namespace NerdStoreEnterprise.Services.Customer.API.Infrastructure.Services
 {
     //TODO -> abstrair para uma lib
     public class Email

@@ -4,10 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NerdStoreEnterprise.Services.Client.API.Data;
+using NerdStoreEnterprise.Services.Customer.API.Data;
 
 namespace NerdStoreEnterprise.Services.Client.API.Data.ClientsMigrations
 {
-    [DbContext(typeof(ClientsDbContext))]
+    [DbContext(typeof(CustomersDbContext))]
     partial class ClientsDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

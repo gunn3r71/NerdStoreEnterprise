@@ -1,15 +1,15 @@
 ﻿using System;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects;
 
-namespace NerdStoreEnterprise.Services.Client.API.Models
+namespace NerdStoreEnterprise.Services.Customer.API.Models
 {
-    public class Client : Entity, IAggregateRoot
+    public class Customer : Entity, IAggregateRoot
     {
-        protected Client()
+        protected Customer()
         {
         }
 
-        public Client(Guid id, string name, string email, string cpf) : base(id)
+        public Customer(Guid id, string name, string email, string cpf) : base(id)
         {
             Name = name;
             Email = new Email(email);
@@ -29,7 +29,7 @@ namespace NerdStoreEnterprise.Services.Client.API.Models
 
         public void Delete()
         {
-            if (Deleted) throw new InvalidOperationException("User is already marked as deleted.");
+            if (Deleted) throw new InvalidOperationException("Customer is already marked as deleted.");
 
             Deleted = true;
         }

@@ -1,12 +1,12 @@
 ﻿using System;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Messages;
-using NerdStoreEnterprise.Services.Client.API.Application.Validations;
+using NerdStoreEnterprise.Services.Customer.API.Application.Validations;
 
-namespace NerdStoreEnterprise.Services.Client.API.Application.Commands
+namespace NerdStoreEnterprise.Services.Customer.API.Application.Commands
 {
-    public class CreateClientCommand : Command
+    public class CreateCustomerCommand : Command
     {
-        public CreateClientCommand(Guid id, string name, string email, string cpf)
+        public CreateCustomerCommand(Guid id, string name, string email, string cpf)
         {
             AggregateId = id;
             Id = id;
@@ -22,7 +22,7 @@ namespace NerdStoreEnterprise.Services.Client.API.Application.Commands
 
         public override bool IsValid()
         {
-            ValidationResult = new CreateClientCommandValidator().Validate(this);
+            ValidationResult = new CreateCustomerCommandValidator().Validate(this);
             return ValidationResult.IsValid;
         }
     }

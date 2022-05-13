@@ -1,10 +1,10 @@
-using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
 using NerdStoreEnterprise.BuildingBlocks.Services.Core;
 
-namespace NerdStoreEnterprise.Services.Client.API
+namespace NerdStoreEnterprise.Services.Customer.API
 {
     public class Program
     {

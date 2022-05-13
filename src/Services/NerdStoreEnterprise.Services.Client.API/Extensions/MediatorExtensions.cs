@@ -1,10 +1,10 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Mediator;
-using System.Threading.Tasks;
 
-namespace NerdStoreEnterprise.Services.Client.API.Extensions
+namespace NerdStoreEnterprise.Services.Customer.API.Extensions
 {
     public static class MediatorExtensions
     {

@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NerdStoreEnterprise.BuildingBlocks.MessageBus;
 using NerdStoreEnterprise.BuildingBlocks.Services.Core.Identity;
 
-namespace NerdStoreEnterprise.Services.Client.API.Configuration
+namespace NerdStoreEnterprise.Services.Customer.API.Configuration
 {
     public static class ApiConfig
     {
@@ -16,7 +15,7 @@ namespace NerdStoreEnterprise.Services.Client.API.Configuration
 
             services.AddMediatR(typeof(Startup));
 
-            services.RegisterServices();
+            services.ResolveDependencies();
 
             services.AddMessageBusConfiguration(configuration);
             

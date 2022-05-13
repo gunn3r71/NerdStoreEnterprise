@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NerdStoreEnterprise.Services.Client.API.Models;
+using NerdStoreEnterprise.Services.Customer.API.Models;
 
-namespace NerdStoreEnterprise.Services.Client.API.Data.Mappings
+namespace NerdStoreEnterprise.Services.Customer.API.Data.Mappings
 {
     public class AddressMapping : IEntityTypeConfiguration<Address>
     {

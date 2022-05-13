@@ -11,8 +11,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using EasyNetQ;
+using Microsoft.Extensions.Logging;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Messages.IntegrationEvents;
+using NerdStoreEnterprise.BuildingBlocks.MessageBus;
 using NerdStoreEnterprise.BuildingBlocks.Services.Core.Controllers;
 
 namespace NerdStoreEnterprise.Services.Identity.API.Controllers
@@ -22,16 +23,21 @@ namespace NerdStoreEnterprise.Services.Identity.API.Controllers
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IMessageBus _bus;
         private readonly TokenSettings _tokenSettings;
-        private IBus _bus;
+        private ILogger<AccountController> _logger;
 
         public AccountController(SignInManager<IdentityUser> signInManager,
                                  UserManager<IdentityUser> userManager,
-                                 IOptions<TokenSettings> tokenSettings)
+                                 IMessageBus bus,
+                                 IOptions<TokenSettings> tokenSettings,
+                                 ILogger<AccountController> logger)
         {
             _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _bus = bus ?? throw new ArgumentNullException(nameof(bus));
             _tokenSettings = tokenSettings.Value;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [HttpPost("register")]
@@ -51,10 +57,18 @@ namespace NerdStoreEnterprise.Services.Identity.API.Controllers
 
             if (result.Succeeded)
             {
-                var success = await RegisterClient(user);
+                var clientResult = await RegisterCustomer(user);
 
-                return CustomResponse(await GetTokenAsync(user.Username));
+                if (clientResult.ValidationResult.IsValid) return CustomResponse(await GetTokenAsync(user.Username));
+                
+                _logger.LogInformation("There was a business error when trying to register a customer");
+
+                await _userManager.DeleteAsync(applicationUser);
+
+                return CustomResponse(clientResult.ValidationResult);
             }
+
+            _logger.LogInformation("Validation errors occurred");
 
             AddError(result.Errors.Select(x => x.Description));
 
@@ -126,8 +140,7 @@ namespace NerdStoreEnterprise.Services.Identity.API.Controllers
             claims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email));
             claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
             claims.Add(new Claim(JwtRegisteredClaimNames.Nbf, ToUnixEpochDate(DateTime.Now).ToString()));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(DateTime.Now).ToString(),
-                ClaimValueTypes.Integer64));
+            claims.Add(new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(DateTime.Now).ToString(), ClaimValueTypes.Integer64));
 
             foreach (var role in roles) claims.Add(new Claim("role", role));
 
@@ -140,15 +153,24 @@ namespace NerdStoreEnterprise.Services.Identity.API.Controllers
         private static long ToUnixEpochDate(DateTime date) =>
             (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
 
-        private async Task<ResponseMessage> RegisterClient(UserRegisterViewModel userModel)
+        private async Task<ResponseMessage> RegisterCustomer(UserRegisterViewModel userModel)
         {
             var user = await _userManager.FindByNameAsync(userModel.Username);
 
             var createdUserIntegrationEvent = new CreatedUserIntegrationEvent(Guid.Parse(user.Id), userModel.Name, user.Email, userModel.Cpf);
 
-            var success = await _bus.Rpc.RequestAsync<CreatedUserIntegrationEvent, ResponseMessage>(createdUserIntegrationEvent);
+            try
+            {
+                _logger.LogInformation($"Sending {createdUserIntegrationEvent.GetType()} - Type: {createdUserIntegrationEvent.MessageType}");
+                return await _bus.RequestAsync<CreatedUserIntegrationEvent, ResponseMessage>(createdUserIntegrationEvent);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error when trying to create a customer.");
 
-            return success;
+                await _userManager.DeleteAsync(user);
+                throw;
+            }
         }
     }
 }

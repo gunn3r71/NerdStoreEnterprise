@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NerdStoreEnterprise.BuildingBlocks.Services.Core.OpenAPI.Filters;
 
-namespace NerdStoreEnterprise.Services.Client.API.Configuration
+namespace NerdStoreEnterprise.Services.Customer.API.Configuration
 {
     public static class SwaggerConfig
     {
@@ -21,7 +21,7 @@ namespace NerdStoreEnterprise.Services.Client.API.Configuration
                     Email = "lucas.p.oliveira@outlook.pt",
                     Name = "Lucas Pereira"
                 },
-                Description = "API to provide client services"
+                Description = "API to provide customer services"
             };
 
             services.AddSwaggerGen(c =>

@@ -4,26 +4,26 @@ using Microsoft.EntityFrameworkCore;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Data;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Mediator;
 using NerdStoreEnterprise.BuildingBlocks.Services.Core.EF;
-using NerdStoreEnterprise.Services.Client.API.Extensions;
+using NerdStoreEnterprise.Services.Customer.API.Extensions;
 
-namespace NerdStoreEnterprise.Services.Client.API.Data
+namespace NerdStoreEnterprise.Services.Customer.API.Data
 {
-    public sealed class ClientsDbContext : DbContext, IUnitOfWork
+    public sealed class CustomersDbContext : DbContext, IUnitOfWork
     {
         private readonly IMediatorHandler _mediatorHandler;
 
-        public ClientsDbContext(DbContextOptions<ClientsDbContext> options) : base(options)
+        public CustomersDbContext(DbContextOptions<CustomersDbContext> options) : base(options)
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             ChangeTracker.AutoDetectChangesEnabled = false;
         }
 
-        public ClientsDbContext(DbContextOptions<ClientsDbContext> options, IMediatorHandler mediatorHandler) : this(options)
+        public CustomersDbContext(DbContextOptions<CustomersDbContext> options, IMediatorHandler mediatorHandler) : this(options)
         {
             _mediatorHandler = mediatorHandler ?? throw new ArgumentNullException(nameof(mediatorHandler));
         }
         
-        public DbSet<Models.Client> Clients { get; set; }
+        public DbSet<Models.Customer> Clients { get; set; }
         public DbSet<Models.Address> Addresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -31,7 +31,7 @@ namespace NerdStoreEnterprise.Services.Client.API.Data
             builder.IgnoreDomainMessageItems();
             builder.ConfigureUnmappedStrings();
             //builder.DisableDeleteBehavior();
-            builder.ApplyConfigurationsFromAssembly(typeof(ClientsDbContext).Assembly);
+            builder.ApplyConfigurationsFromAssembly(typeof(CustomersDbContext).Assembly);
         }
 
         public async Task<bool> CommitAsync()

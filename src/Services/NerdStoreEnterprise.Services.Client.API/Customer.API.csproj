@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>1fbfb3d6-2b29-4c00-b46e-b248d0ef0fce</UserSecretsId>
-	<RootNamespace>NerdStoreEnterprise.Services.Client.API</RootNamespace>
+	<RootNamespace>NerdStoreEnterprise.Services.Customer.API</RootNamespace>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..</DockerfileContext>
   </PropertyGroup>
@@ -20,14 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Commands\" />
-    <Folder Include="Application\Events\" />
-    <Folder Include="Application\Validations\" />
     <Folder Include="Application\Queries\" />
-    <Folder Include="Data\Repositories\" />
     <Folder Include="Extensions\" />
     <Folder Include="Infrastructure\Services\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using System;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects;
 
-namespace NerdStoreEnterprise.Services.Client.API.Models
+namespace NerdStoreEnterprise.Services.Customer.API.Models
 {
     public class Address : Entity
     {
@@ -25,7 +25,7 @@ namespace NerdStoreEnterprise.Services.Client.API.Models
         public string ZipCode { get; private set; }
         public string City { get; private set; }
         public string State { get; private set; }
-        public Guid ClientId { get; private set; }
-        public Client Client { get; private set; }
+        public Guid CustomerId { get; private set; }
+        public Customer Customer { get; private set; }
     }
 }

@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using NerdStoreEnterprise.Services.Client.API.Data;
+using NerdStoreEnterprise.Services.Customer.API.Data;
 
-namespace NerdStoreEnterprise.Services.Client.API.Infrastructure.Factories
+namespace NerdStoreEnterprise.Services.Customer.API.Infrastructure.Factories
 {
-    public class ClientsDbContextFactory : IDesignTimeDbContextFactory<ClientsDbContext>
+    public class CustomersDbContextFactory : IDesignTimeDbContextFactory<CustomersDbContext>
     {
-        public ClientsDbContext CreateDbContext(string[] args)
+        public CustomersDbContext CreateDbContext(string[] args)
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? Environments.Development;
 
@@ -22,7 +22,7 @@ namespace NerdStoreEnterprise.Services.Client.API.Infrastructure.Factories
 
             var connectionString = configuration.GetConnectionString("ClientsServiceConnection");
 
-            var builder = new DbContextOptionsBuilder<ClientsDbContext>();
+            var builder = new DbContextOptionsBuilder<CustomersDbContext>();
 
             builder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), x =>
                 {
@@ -31,7 +31,7 @@ namespace NerdStoreEnterprise.Services.Client.API.Infrastructure.Factories
                     x.CommandTimeout(15);
                 });
 
-            return new ClientsDbContext(builder.Options);
+            return new CustomersDbContext(builder.Options);
         }
     }
 }

@@ -29,9 +29,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{25CA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.API", "src\Services\NerdStoreEnterprise.Services.Catalog.API\Catalog.API.csproj", "{AA19CC41-4A03-4787-B150-13B72FED33FD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{0B8F483D-545B-415F-A570-DED05453963A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Customer", "Customer", "{0B8F483D-545B-415F-A570-DED05453963A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.API", "src\Services\NerdStoreEnterprise.Services.Client.API\Client.API.csproj", "{CDC4F526-E7E0-4FBD-B99F-D61B0C87E7E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.API", "src\Services\NerdStoreEnterprise.Services.Client.API\Customer.API.csproj", "{CDC4F526-E7E0-4FBD-B99F-D61B0C87E7E2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment", "Payment", "{A2DEB2F1-D80B-4E2C-B4AD-0097A22E23A1}"
 EndProject
@@ -53,7 +53,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.UnitTests", "tests\B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageBus", "MessageBus", "{EB81DDED-9518-472C-BD1D-AD0C140BE387}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBus", "src\Building Blocks\NerdStoreEnterprise.BuildingBlocks.MessageBus\MessageBus.csproj", "{AA388944-8547-4ECD-A22B-DC85C4BB5806}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageBus", "src\Building Blocks\NerdStoreEnterprise.BuildingBlocks.MessageBus\MessageBus.csproj", "{AA388944-8547-4ECD-A22B-DC85C4BB5806}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

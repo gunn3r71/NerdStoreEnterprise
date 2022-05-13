@@ -10,7 +10,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
     {
         protected bool HasErrors(ErrorViewModel error)
         {
-            if (error is null || !error.Errors.Messages.Any()) return false;
+            if (error is null || error.Errors.Messages.Any()) return false;
 
             error.Errors.Messages.ForEach(x => ModelState.AddModelError(string.Empty, x));
 

@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects;
 
-namespace NerdStoreEnterprise.Services.Client.API.Data.Mappings
+namespace NerdStoreEnterprise.Services.Customer.API.Data.Mappings
 {
-    public class ClientMapping : IEntityTypeConfiguration<Models.Client>
+    public class ClientMapping : IEntityTypeConfiguration<Models.Customer>
     {
-        public void Configure(EntityTypeBuilder<Models.Client> builder)
+        public void Configure(EntityTypeBuilder<Models.Customer> builder)
         {
             builder.ToTable("Clients");
 
@@ -37,7 +37,7 @@ namespace NerdStoreEnterprise.Services.Client.API.Data.Mappings
             });
 
             builder.HasOne(x => x.Address)
-                .WithOne(x => x.Client);
+                .WithOne(x => x.Customer);
         }
     }
 }

@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NerdStoreEnterprise.Services.Client.API.Configuration;
+using NerdStoreEnterprise.Services.Customer.API.Configuration;
 
-namespace NerdStoreEnterprise.Services.Client.API
+namespace NerdStoreEnterprise.Services.Customer.API
 {
     public class Startup
     {

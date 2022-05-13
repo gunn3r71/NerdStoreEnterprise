@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace NerdStoreEnterprise.Services.Client.API.Infrastructure.Services
+namespace NerdStoreEnterprise.Services.Customer.API.Infrastructure.Services
 {
     public class EmailService : IEmailService
     {
