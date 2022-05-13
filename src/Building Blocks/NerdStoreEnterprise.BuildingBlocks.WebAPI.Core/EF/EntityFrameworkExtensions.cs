@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Messages;
 using ValidationResult = FluentValidation.Results.ValidationResult;

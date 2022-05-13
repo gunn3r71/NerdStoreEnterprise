@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NerdStoreEnterprise.BuildingBlocks.Services.Core.EventBus;
+using NerdStoreEnterprise.BuildingBlocks.MessageBus;
 using NerdStoreEnterprise.BuildingBlocks.Services.Core.Identity;
 
 namespace NerdStoreEnterprise.Services.Client.API.Configuration
@@ -18,9 +18,9 @@ namespace NerdStoreEnterprise.Services.Client.API.Configuration
 
             services.RegisterServices();
 
+            services.AddMessageBusConfiguration(configuration);
+            
             services.AddCustomAuthentication(configuration);
-
-            services.AddRabbitMq(configuration);
 
             services.AddControllers();
 

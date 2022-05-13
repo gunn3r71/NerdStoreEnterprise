@@ -4,7 +4,6 @@ using NerdStoreEnterprise.Services.Client.API.Data;
 using NerdStoreEnterprise.Services.Client.API.Data.Repositories;
 using NerdStoreEnterprise.Services.Client.API.Infrastructure.Services;
 using NerdStoreEnterprise.Services.Client.API.Models;
-using NerdStoreEnterprise.Services.Client.API.Services;
 
 namespace NerdStoreEnterprise.Services.Client.API.Configuration
 {
@@ -17,9 +16,7 @@ namespace NerdStoreEnterprise.Services.Client.API.Configuration
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<ClientsDbContext>();
 
-            services.AddScoped<IEmailService, EmailService>();
-
-            services.AddHostedService<CreateClientIntegrationHandler>();
+            services.AddSingleton<IEmailService, EmailService>();
         }
     }
 }

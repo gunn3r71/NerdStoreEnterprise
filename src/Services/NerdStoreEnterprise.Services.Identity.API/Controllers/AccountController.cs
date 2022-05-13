@@ -12,10 +12,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using EasyNetQ;
-using FluentValidation.Results;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Messages.IntegrationEvents;
 using NerdStoreEnterprise.BuildingBlocks.Services.Core.Controllers;
-using NerdStoreEnterprise.BuildingBlocks.Services.Core.EventBus;
 
 namespace NerdStoreEnterprise.Services.Identity.API.Controllers
 {
@@ -29,15 +27,11 @@ namespace NerdStoreEnterprise.Services.Identity.API.Controllers
 
         public AccountController(SignInManager<IdentityUser> signInManager,
                                  UserManager<IdentityUser> userManager,
-                                 IOptions<TokenSettings> tokenSettings,
-                                 IOptions<RabbitMq> rabbitMqConfig)
+                                 IOptions<TokenSettings> tokenSettings)
         {
             _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _tokenSettings = tokenSettings.Value;
-
-            var rabbitMq = rabbitMqConfig.Value;
-            _bus = RabbitHutch.CreateBus($"host={rabbitMq.Host};virtualHost={rabbitMq.VHost};username={rabbitMq.User};password={rabbitMq.Password}");
         }
 
         [HttpPost("register")]

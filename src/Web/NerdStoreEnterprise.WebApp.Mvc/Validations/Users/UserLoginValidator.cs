@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects;
 using NerdStoreEnterprise.WebApp.Mvc.Models.Users;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Validations.Users

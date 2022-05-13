@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq.Expressions;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using NerdStoreEnterprise.Services.Identity.API.Data;

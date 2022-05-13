@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Building Blocks\NerdStoreEnterprise.BuildingBlocks.Core\Shared.csproj" />
+    <ProjectReference Include="..\..\Building Blocks\NerdStoreEnterprise.BuildingBlocks.MessageBus\MessageBus.csproj" />
     <ProjectReference Include="..\..\Building Blocks\NerdStoreEnterprise.BuildingBlocks.WebAPI.Core\Core.csproj" />
   </ItemGroup>
 </Project>

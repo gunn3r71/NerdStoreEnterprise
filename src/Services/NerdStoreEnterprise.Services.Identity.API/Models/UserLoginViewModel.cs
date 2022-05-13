@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace NerdStoreEnterprise.Services.Identity.API.Models
+﻿namespace NerdStoreEnterprise.Services.Identity.API.Models
 {
     public class UserLoginViewModel
     {
