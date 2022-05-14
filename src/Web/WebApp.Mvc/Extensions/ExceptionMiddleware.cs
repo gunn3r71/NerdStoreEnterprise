@@ -51,9 +51,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Extensions
             context.Response.StatusCode = (int) statusCode;
         }
 
-        private static void HandleCircuitBreakerExceptionAsync(HttpContext context)
-        {
+        private static void HandleCircuitBreakerExceptionAsync(HttpContext context) => 
             context.Response.Redirect("/system-unavailable");
-        }
     }
 }

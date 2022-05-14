@@ -12,7 +12,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
 
         public CatalogController(ICatalogService catalogService)
         {
-            _catalogService = catalogService;
+            _catalogService = catalogService ?? throw new ArgumentNullException(nameof(catalogService));
         }
 
         [AllowAnonymous]

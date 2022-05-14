@@ -12,46 +12,32 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Extensions
 
         public AspNetUser(IHttpContextAccessor contextAccessor)
         {
-            _contextAccessor = contextAccessor;
+            _contextAccessor = contextAccessor ?? throw new ArgumentNullException(nameof(contextAccessor));
         }
 
         public string Name => _contextAccessor.HttpContext?.User.Identity?.Name;
 
-        public Guid GetUserId()
-        {
-            return Guid.TryParse(GetHttpContext()?.User?.GetUserId() ?? string.Empty, out var userId)
+        public Guid GetUserId() =>
+            Guid.TryParse(GetHttpContext()?.User?.GetUserId() ?? string.Empty, out var userId)
                 ? userId
                 : Guid.Empty;
-        }
 
-        public string GetUserEmail()
-        {
-            return GetHttpContext()?.User?.GetUserEmail();
-        }
+        public string GetUserEmail() => 
+            GetHttpContext()?.User?.GetUserEmail();
 
-        public string GetUserToken()
-        {
-            return GetHttpContext()?.User?.GetUserToken();
-        }
+        public string GetUserToken() => 
+            GetHttpContext()?.User?.GetUserToken();
 
-        public bool IsAuthenticated()
-        {
-            return GetHttpContext()?.User?.Identity?.IsAuthenticated ?? false;
-        }
+        public bool IsAuthenticated() => 
+            GetHttpContext()?.User?.Identity?.IsAuthenticated ?? false;
 
-        public bool HasRole(string role)
-        {
-            return GetHttpContext()?.User?.IsInRole(role) ?? false;
-        }
+        public bool HasRole(string role) => 
+            GetHttpContext()?.User?.IsInRole(role) ?? false;
 
-        public IEnumerable<Claim> GetUserClaims()
-        {
-            return GetHttpContext()?.User?.Claims ?? Enumerable.Empty<Claim>();
-        }
+        public IEnumerable<Claim> GetUserClaims() => 
+            GetHttpContext()?.User?.Claims ?? Enumerable.Empty<Claim>();
 
-        public HttpContext GetHttpContext()
-        {
-            return _contextAccessor.HttpContext;
-        }
+        public HttpContext GetHttpContext() => 
+            _contextAccessor.HttpContext;
     }
 }

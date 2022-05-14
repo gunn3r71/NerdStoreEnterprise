@@ -18,8 +18,8 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
         private readonly IAuthenticationService _authenticationService;
 
         public AccountController(IAuthenticationService authenticationService)
-        {
-            _authenticationService = authenticationService;
+        {?
+            _authenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
         }
 
         [AllowAnonymous]
