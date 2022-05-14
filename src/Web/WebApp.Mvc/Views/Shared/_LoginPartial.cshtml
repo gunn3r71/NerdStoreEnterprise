@@ -1,26 +1,23 @@
 ﻿@using NerdStoreEnterprise.WebApp.Mvc.Extensions
-@inject IUser AppUser
+@inject IUser _appUser
 
 <ul class="navbar-nav">
-    @if (AppUser.IsAuthenticated())
+    @if (_appUser.IsAuthenticated())
     {
-        <div class="dropdown-center">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="userProfile" data-bs-toggle="dropdown" aria-expanded="false">
-                <a class="nav-link text-dark" title="Manage">
-                    <img class="icon icon-sm rounded-circle" src="https://s.gravatar.com/avatar/@(this.HashEmailForGravatar(AppUser.GetUserEmail()))?d=mm&s=50" alt="User profile images"/>
-                </a>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="userProfile">
-                <li>
-                    <a class="dropdown-item text-dark" asp-controller="Account" asp-action="Logout">Logout</a>
-                </li>
-            </ul>
+        <div class="dropdown">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img class="rounded-circle" src="https://s.gravatar.com/avatar/@(this.HashEmailForGravatar(_appUser.GetUserEmail()))?d=mm&s=50" alt="User profile images"/>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a></li>
+            </div>
         </div>
     }
     else
     {
-        <li class="nav-item" style="padding-right: 30px;">
-            <a class="btn btn-success" asp-controller="Account" asp-action="Register">Register</a>
+        <li class="nav-item" style="padding-right: 12px;">
+            <a class="btn btn-secondary" asp-controller="Account" asp-action="Register">Register</a>
         </li>
         <li class="nav-item">
             <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Login</a>

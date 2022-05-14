@@ -16,10 +16,4 @@
     <ItemGroup>
         <Folder Include="Controllers\"/>
     </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\Building Blocks\Core\Shared.csproj"/>
-        <ProjectReference Include="..\..\Building Blocks\WebAPI.Core\Core.csproj"/>
-    </ItemGroup>
-
 </Project>
