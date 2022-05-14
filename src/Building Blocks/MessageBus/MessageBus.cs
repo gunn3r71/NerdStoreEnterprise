@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using EasyNetQ;
 using EasyNetQ.Internals;
@@ -12,13 +13,16 @@ namespace NerdStoreEnterprise.BuildingBlocks.MessageBus
     {
         private readonly string _connectionString;
         private IBus _bus;
+        private IAdvancedBus _advancedBus;
 
         public MessageBus(string connectionString)
         {
             _connectionString = connectionString;
+            TryConnect();
         }
 
         public bool IsConnected => _bus?.Advanced.IsConnected ?? false;
+        public IAdvancedBus AdvancedBus => _bus?.Advanced;
 
         public void Publish<T>(T message) where T : IntegrationEvent
         {
@@ -71,6 +75,12 @@ namespace NerdStoreEnterprise.BuildingBlocks.MessageBus
             return _bus.Rpc.RespondAsync(respond);
         }
 
+        public AwaitableDisposable<IDisposable> RespondAsync<TRequest, TResponse>(Func<CreatedUserIntegrationEvent, Task<ResponseMessage>> respond, CancellationToken cancellationToken)
+        {
+            TryConnect();
+            return _bus.Rpc.RespondAsync(respond, cancellationToken);
+        }
+
         public void Dispose()
         {
             _bus?.Dispose();
@@ -84,7 +94,22 @@ namespace NerdStoreEnterprise.BuildingBlocks.MessageBus
                 .Or<BrokerUnreachableException>()
                 .WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
 
-            policy.Execute(() => _bus = RabbitHutch.CreateBus(_connectionString));
+            policy.Execute(() =>
+            {
+                _bus = RabbitHutch.CreateBus(_connectionString);
+                _advancedBus = _bus.Advanced;
+
+                _advancedBus.Disconnected += OnDisconnect;
+            });
+        }
+
+        private void OnDisconnect(object sender, EventArgs args)
+        {
+            var policy = Policy.Handle<EasyNetQException>()
+                .Or<BrokerUnreachableException>()
+                .RetryForever();
+
+            policy.Execute(TryConnect);
         }
     }
 }

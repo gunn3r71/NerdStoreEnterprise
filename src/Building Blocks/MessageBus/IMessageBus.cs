@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
+using EasyNetQ;
 using EasyNetQ.Internals;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Messages.IntegrationEvents;
 
@@ -8,6 +10,7 @@ namespace NerdStoreEnterprise.BuildingBlocks.MessageBus
     public interface IMessageBus : IDisposable
     {
         bool IsConnected { get; }
+        IAdvancedBus AdvancedBus { get; }
 
         void Publish<T>(T message) where T : IntegrationEvent;
 

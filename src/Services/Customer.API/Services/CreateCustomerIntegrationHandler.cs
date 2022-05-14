@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using EasyNetQ;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Mediator;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Messages.IntegrationEvents;
 using NerdStoreEnterprise.BuildingBlocks.MessageBus;
@@ -17,16 +19,25 @@ namespace NerdStoreEnterprise.Services.Customer.API.Services
 
         public CreateCustomerIntegrationHandler(IServiceProvider serviceProvider, IMessageBus bus)
         {
-            _serviceProvider = serviceProvider;
-            _bus = bus;
+            _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+            _bus = bus ?? throw new ArgumentNullException(nameof(bus));
         }
 
         protected override Task ExecuteAsync(CancellationToken cancellationToken)
         {
+            SetResponder();
+
+            return Task.CompletedTask;
+        }
+
+        private void OnConnect(object sender, ConnectedEventArgs e) => SetResponder();
+
+        private void SetResponder()
+        {
             _bus.RespondAsync<CreatedUserIntegrationEvent, ResponseMessage>(async request =>
                 await CreateCustomer(request));
 
-            return Task.CompletedTask;
+            _bus.AdvancedBus.Connected += OnConnect;
         }
 
         private async Task<ResponseMessage> CreateCustomer(CreatedUserIntegrationEvent message)
