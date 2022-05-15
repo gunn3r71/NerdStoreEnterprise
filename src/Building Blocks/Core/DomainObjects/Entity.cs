@@ -8,17 +8,12 @@ namespace NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects
     {
         private List<Event> _events;
 
-        protected Entity()
+        protected Entity(Guid? id = null)
         {
-            Id = Guid.NewGuid();
+            Id = id ?? Guid.NewGuid();
         }
 
-        protected Entity(Guid id)
-        {
-            Id = id;
-        }
-
-        public Guid Id { get; }
+        public Guid Id { get; set; }
 
         public IReadOnlyList<Event> Events => _events?.AsReadOnly();
 

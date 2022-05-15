@@ -21,7 +21,7 @@ namespace NerdStoreEnterprise.Services.Customer.API.Models
         public Email Email { get; private set; }
         public Cpf Cpf { get; }
         public bool Deleted { get; private set; }
-        public virtual Address Address { get; protected set; }
+        public Address Address { get; private set; }
 
         public void AssignAddress(Address address)
         {

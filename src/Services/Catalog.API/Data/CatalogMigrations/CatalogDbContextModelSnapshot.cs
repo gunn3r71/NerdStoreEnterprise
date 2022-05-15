@@ -2,17 +2,15 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NerdStoreEnterprise.Services.Catalog.API.Data;
 
-namespace NerdStoreEnterprise.Services.Catalog.API.Data.Migrations
+namespace NerdStoreEnterprise.Services.Catalog.API.Data.CatalogMigrations
 {
     [DbContext(typeof(CatalogDbContext))]
-    [Migration("20220509015916_Entity")]
-    partial class Entity
+    partial class CatalogDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,9 +31,6 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("varchar(100)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(254)
@@ -45,18 +40,7 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Data.Migrations
                         .HasPrecision(5, 2)
                         .HasColumnType("decimal(5,2)");
 
-                    b.Property<int>("QuantityInStock")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<int>("TempId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("TempId");
 
                     b.ToTable("Products");
                 });

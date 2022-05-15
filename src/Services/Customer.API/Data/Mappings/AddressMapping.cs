@@ -12,8 +12,6 @@ namespace NerdStoreEnterprise.Services.Customer.API.Data.Mappings
 
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Id).IsRequired();
-
             builder.Property(x => x.StreetName)
                 .IsRequired()
                 .HasMaxLength(200)
@@ -38,12 +36,6 @@ namespace NerdStoreEnterprise.Services.Customer.API.Data.Mappings
                 .IsRequired()
                 .HasMaxLength(100)
                 .HasColumnType("VARCHAR(100)");
-
-            builder.Property(x => x.CustomerId)
-                .IsRequired()
-                .HasColumnType("CHAR(36)");
-
-            builder.Ignore(x => x.Customer);
         }
     }
 }

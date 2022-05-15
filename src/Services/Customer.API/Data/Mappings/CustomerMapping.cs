@@ -13,8 +13,6 @@ namespace NerdStoreEnterprise.Services.Customer.API.Data.Mappings
 
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Id).IsRequired();
-
             builder.Property(x => x.Name)
                 .HasMaxLength(150)
                 .HasColumnType("VARCHAR(150)");
@@ -39,10 +37,8 @@ namespace NerdStoreEnterprise.Services.Customer.API.Data.Mappings
                     .HasColumnType($"VARCHAR({Email.MaxLength})");
             });
 
-            builder.HasOne(x => x.Address)
-                .WithOne(x => x.Customer);
-
-            builder.Ignore(x => x.Address);
+            builder.HasOne(c => c.Address)
+                .WithOne(c => c.Customer);
         }
     }
 }

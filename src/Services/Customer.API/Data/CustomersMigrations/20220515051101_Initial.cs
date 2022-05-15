@@ -21,13 +21,11 @@ namespace NerdStoreEnterprise.Services.Customer.API.Data.CustomersMigrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Cpf_Number = table.Column<string>(type: "VARCHAR(11)", maxLength: 11, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Deleted = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    TempId1 = table.Column<int>(type: "int", nullable: false)
+                    Deleted = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customers", x => x.Id);
-                    table.UniqueConstraint("AK_Customers_TempId1", x => x.TempId1);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -46,13 +44,11 @@ namespace NerdStoreEnterprise.Services.Customer.API.Data.CustomersMigrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     State = table.Column<string>(type: "VARCHAR(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CustomerId = table.Column<Guid>(type: "CHAR(36)", nullable: false, collation: "ascii_general_ci"),
-                    TempId = table.Column<int>(type: "int", nullable: false)
+                    CustomerId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Adresses", x => x.Id);
-                    table.UniqueConstraint("AK_Adresses_TempId", x => x.TempId);
                     table.ForeignKey(
                         name: "FK_Adresses_Customers_CustomerId",
                         column: x => x.CustomerId,
@@ -65,7 +61,8 @@ namespace NerdStoreEnterprise.Services.Customer.API.Data.CustomersMigrations
             migrationBuilder.CreateIndex(
                 name: "IX_Adresses_CustomerId",
                 table: "Adresses",
-                column: "CustomerId");
+                column: "CustomerId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
