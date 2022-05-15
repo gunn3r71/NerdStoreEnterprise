@@ -1,18 +1,19 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using NerdStoreEnterprise.WebApp.Mvc.Extensions;
+using NerdStoreEnterprise.BuildingBlocks.Services.Core.User;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Services.Handlers
 {
     public class HttpClientAuthorizationDelegatingHandler : DelegatingHandler
     {
-        private readonly IUser _user;
+        private readonly IAspNetUser _user;
 
-        public HttpClientAuthorizationDelegatingHandler(IUser user)
+        public HttpClientAuthorizationDelegatingHandler(IAspNetUser user)
         {
-            _user = user;
+            _user = user ?? throw new ArgumentNullException(nameof(user));
         }
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,

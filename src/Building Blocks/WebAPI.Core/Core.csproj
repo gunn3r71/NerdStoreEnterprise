@@ -6,25 +6,25 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.14"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.14"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" version="5.0.14"/>
-        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="5.0.1"/>
-        <PackageReference Include="FluentValidation" Version="11.0.1"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.14" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.14" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" version="5.0.14" />
+        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="5.0.1" />
+        <PackageReference Include="FluentValidation" Version="11.0.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Identity\Authorization\"/>
-        <Folder Include="OpenAPI\Filters\"/>
+        <Folder Include="Identity\Authorization\" />
+        <Folder Include="OpenAPI\Filters\" />
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Remove="Polly\RetryPolicyConfig.cs"/>
+        <Compile Remove="Polly\RetryPolicyConfig.cs" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Core\Shared.csproj"/>
+        <ProjectReference Include="..\Core\Shared.csproj" />
     </ItemGroup>
 
 </Project>

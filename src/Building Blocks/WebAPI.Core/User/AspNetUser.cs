@@ -4,9 +4,9 @@ using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
-namespace NerdStoreEnterprise.WebApp.Mvc.Extensions
+namespace NerdStoreEnterprise.BuildingBlocks.Services.Core.User
 {
-    public class AspNetUser : IUser
+    public class AspNetUser : IAspNetUser
     {
         private readonly IHttpContextAccessor _contextAccessor;
 

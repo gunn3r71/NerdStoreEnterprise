@@ -7,6 +7,7 @@ using NerdStoreEnterprise.WebApp.Mvc.Services.Handlers;
 using Polly;
 using Refit;
 using System;
+using NerdStoreEnterprise.BuildingBlocks.Services.Core.User;
 using static NerdStoreEnterprise.BuildingBlocks.Services.Core.Polly.PollyExtensions;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
@@ -28,7 +29,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
 
             services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddScoped<IUser, AspNetUser>();
+            services.AddScoped<IAspNetUser, AspNetUser>();
         }
 
         private static IHttpClientBuilder RegisterHttpClient(this IServiceCollection services, string httpClientName,

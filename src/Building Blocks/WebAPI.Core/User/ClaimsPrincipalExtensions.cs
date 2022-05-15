@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Claims;
 
-namespace NerdStoreEnterprise.WebApp.Mvc.Extensions
+namespace NerdStoreEnterprise.BuildingBlocks.Services.Core.User
 {
     public static class ClaimsPrincipalExtensions
     {
