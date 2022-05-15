@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NerdStoreEnterprise.Services.Cart.API.Data;
 
 namespace NerdStoreEnterprise.Services.Cart.API.Configuration
 {
@@ -8,14 +9,14 @@ namespace NerdStoreEnterprise.Services.Cart.API.Configuration
     {
         public static void AddCustomDatabase(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<CustomersDbContext>(o =>
+            services.AddDbContext<CartDbContext>(o =>
             {
-                var connectionString = configuration.GetConnectionString("CustomersServiceConnection");
+                var connectionString = configuration.GetConnectionString("CartServiceConnection");
 
                 o.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), x =>
                 {
                     x.EnableRetryOnFailure(3);
-                    x.MigrationsHistoryTable("CustomersMigrations");
+                    x.MigrationsHistoryTable("CartMigrations");
                     x.CommandTimeout(15);
                 });
             });

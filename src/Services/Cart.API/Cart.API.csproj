@@ -21,6 +21,9 @@
 
     <ItemGroup>
         <Folder Include="Controllers\" />
+        <Folder Include="Data\Mappings\" />
+        <Folder Include="Infrastructure\Factories\" />
+        <Folder Include="Models\" />
     </ItemGroup>
 
     <ItemGroup>
