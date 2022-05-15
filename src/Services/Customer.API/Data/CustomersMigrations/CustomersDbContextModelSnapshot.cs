@@ -39,7 +39,7 @@ namespace NerdStoreEnterprise.Services.Customer.API.Data.CustomersMigrations
                         .HasColumnType("VARCHAR(100)");
 
                     b.Property<Guid>("CustomerId")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("CHAR(36)");
 
                     b.Property<string>("State")
                         .IsRequired()
@@ -54,15 +54,11 @@ namespace NerdStoreEnterprise.Services.Customer.API.Data.CustomersMigrations
                     b.Property<int>("TempId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ZipCode")
-                        .HasColumnType("varchar(100)");
-
                     b.HasKey("Id");
 
                     b.HasAlternateKey("TempId");
 
-                    b.HasIndex("CustomerId")
-                        .IsUnique();
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Adresses");
                 });
@@ -95,8 +91,8 @@ namespace NerdStoreEnterprise.Services.Customer.API.Data.CustomersMigrations
             modelBuilder.Entity("NerdStoreEnterprise.Services.Customer.API.Models.Address", b =>
                 {
                     b.HasOne("NerdStoreEnterprise.Services.Customer.API.Models.Customer", "Customer")
-                        .WithOne("Address")
-                        .HasForeignKey("NerdStoreEnterprise.Services.Customer.API.Models.Address", "CustomerId")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -144,11 +140,6 @@ namespace NerdStoreEnterprise.Services.Customer.API.Data.CustomersMigrations
                     b.Navigation("Cpf");
 
                     b.Navigation("Email");
-                });
-
-            modelBuilder.Entity("NerdStoreEnterprise.Services.Customer.API.Models.Customer", b =>
-                {
-                    b.Navigation("Address");
                 });
 #pragma warning restore 612, 618
         }

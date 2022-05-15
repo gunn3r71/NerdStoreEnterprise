@@ -24,11 +24,11 @@
     <ItemGroup>
         <Folder Include="Application\Queries\" />
         <Folder Include="Extensions\" />
-        <Folder Include="Infrastructure\Services\" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\Building Blocks\Core\Shared.csproj" />
+      <ProjectReference Include="..\..\Building Blocks\Email\EmailSender.csproj" />
       <ProjectReference Include="..\..\Building Blocks\MessageBus\MessageBus.csproj" />
       <ProjectReference Include="..\..\Building Blocks\WebAPI.Core\Core.csproj" />
     </ItemGroup>

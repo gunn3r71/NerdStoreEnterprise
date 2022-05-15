@@ -1,15 +1,16 @@
-﻿namespace NerdStoreEnterprise.Services.Customer.API.Infrastructure.Services
+﻿namespace NerdStoreEnterprise.BuildingBlocks.EmailSender
 {
-    //TODO -> abstrair para uma lib
     public class Email
     {
-        public Email(string subject, string message, bool isHtml)
+        public Email(string[] to, string subject, string message, bool isHtml)
         {
+            To = to;
             Subject = subject;
             Message = message;
             IsHtml = isHtml;
         }
-
+        
+        public string[] To { get; }
         public string Subject { get; }
         public string Message { get; }
         public bool IsHtml { get; }

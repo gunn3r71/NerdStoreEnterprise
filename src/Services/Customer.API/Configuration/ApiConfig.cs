@@ -15,7 +15,7 @@ namespace NerdStoreEnterprise.Services.Customer.API.Configuration
 
             services.AddMediatR(typeof(Startup));
 
-            services.ResolveDependencies();
+            services.ResolveDependencies(configuration);
 
             services.AddMessageBusConfiguration(configuration);
 

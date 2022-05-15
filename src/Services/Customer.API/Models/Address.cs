@@ -26,7 +26,7 @@ namespace NerdStoreEnterprise.Services.Customer.API.Models
         public string ZipCode { get; }
         public string City { get; }
         public string State { get; }
-        public Guid CustomerId { get; private set; }
-        public Customer Customer { get; private set; }
+        public virtual Guid CustomerId { get; protected set; }
+        public virtual Customer Customer { get; protected set; }
     }
 }

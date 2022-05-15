@@ -2,30 +2,28 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using NerdStoreEnterprise.Services.Customer.API.Infrastructure.Services;
+using NerdStoreEnterprise.BuildingBlocks.EmailSender;
 
 namespace NerdStoreEnterprise.Services.Customer.API.Application.Events
 {
     public class CreatedCustomerEventHandler : INotificationHandler<CreatedCustomerEvent>
     {
-        private readonly IEmailService _emailService;
+        private readonly IEmailSender _emailService;
 
-        public CreatedCustomerEventHandler(IEmailService emailService)
+        public CreatedCustomerEventHandler(IEmailSender emailService)
         {
             _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
         }
 
-        public Task Handle(CreatedCustomerEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(CreatedCustomerEvent notification, CancellationToken cancellationToken)
         {
-            var subject = "Welcome to Nerd Store Enterprise";
-            var message =
-                "<p>We want you to have an excellent experience with us.<br/> The Nerd Store Enterprise team appreciates your trust.</p>";
+            var to = new [] {notification.Email};
+            var subject = $"Welcome to Nerd Store Enterprise {notification.Name}";
+            var message = $"<p>we want you to have an excellent experience with us.<br/> The Nerd Store Enterprise team appreciates your trust.</p>";
 
-            var email = new Email(subject, message, true);
+            var email = new Email(to ,subject, message, true);
 
-            _emailService.SendEmailAsync(email, notification.Email);
-
-            return Task.CompletedTask;
+            await _emailService.SendEmailAsync(email, cancellationToken);
         }
     }
 }
