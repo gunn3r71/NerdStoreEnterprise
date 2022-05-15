@@ -10,7 +10,7 @@ using NerdStoreEnterprise.Services.Catalog.API.Models;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/catalog")]
     public class CatalogController : BaseController
     {
         private readonly IProductRepository _productRepository;

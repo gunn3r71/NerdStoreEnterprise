@@ -1,19 +1,21 @@
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using NerdStoreEnterprise.BuildingBlocks.Services.Core;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace NerdStoreEnterprise.Services.Cart.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
-        }
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? Environments.Development;
+            var contentRootPath = Directory.GetCurrentDirectory();
 
-        public static IHostBuilder CreateHostBuilder(string[] args)
-        {
-            return Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+            await ServiceHost.Create<Startup>(args, env, contentRootPath)
+                .Build()
+                .RunAsync();
         }
     }
 }

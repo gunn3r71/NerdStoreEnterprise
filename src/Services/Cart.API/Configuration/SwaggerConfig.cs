@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NerdStoreEnterprise.BuildingBlocks.Services.Core.OpenAPI.Filters;
 
-namespace NerdStoreEnterprise.Services.Customer.API.Configuration
+namespace NerdStoreEnterprise.Services.Cart.API.Configuration
 {
     public static class SwaggerConfig
     {
@@ -14,14 +14,14 @@ namespace NerdStoreEnterprise.Services.Customer.API.Configuration
         {
             var openApiInfo = new OpenApiInfo
             {
-                Title = "NerdStoreEnterprise.Services.Customer.API",
+                Title = "NerdStoreEnterprise.Services.Cart.API",
                 Version = "v1",
                 Contact = new OpenApiContact
                 {
                     Email = "lucas.p.oliveira@outlook.pt",
                     Name = "Lucas Pereira"
                 },
-                Description = "API to provide customer services"
+                Description = "API to provide cart services"
             };
 
             services.AddSwaggerGen(c =>
