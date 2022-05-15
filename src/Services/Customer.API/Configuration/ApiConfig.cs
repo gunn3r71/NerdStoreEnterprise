@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +21,8 @@ namespace NerdStoreEnterprise.Services.Customer.API.Configuration
             services.AddMessageBusConfiguration(configuration);
 
             services.AddCustomAuthentication(configuration);
+
+            services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
 
             services.AddControllers();
 

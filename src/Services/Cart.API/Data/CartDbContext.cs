@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Data;
 using NerdStoreEnterprise.BuildingBlocks.Services.Core.EF;
 using NerdStoreEnterprise.Services.Cart.API.Models;
 
 namespace NerdStoreEnterprise.Services.Cart.API.Data
 {
-    public sealed class CartDbContext : DbContext
+    public sealed class CartDbContext : DbContext, IUnitOfWork
     {
         public CartDbContext(DbContextOptions<CartDbContext> options) : base(options)
         {
@@ -22,6 +24,13 @@ namespace NerdStoreEnterprise.Services.Cart.API.Data
             builder.IgnoreDomainMessageItems();
 
             builder.ApplyConfigurationsFromAssembly(typeof(CartDbContext).Assembly);
+        }
+
+        public async Task<bool> CommitAsync()
+        {
+            var success = await SaveChangesAsync() > 0;
+
+            return success;
         }
     }
 }
