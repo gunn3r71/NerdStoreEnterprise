@@ -42,24 +42,39 @@ namespace NerdStoreEnterprise.Services.Cart.API.Controllers
                 HandleExistingCart(cart, item);
             }
 
-            var result = await _customerCartRepository.UnitOfWork.CommitAsync();
-
-            if (result) return CustomResponse();
-
-            AddError("There was an error persisting the data.");
-
+            await PersistData();
+            
             return CustomResponse();
         }
 
         [HttpPut("{productId:guid}")]
         public async Task<IActionResult> EditCartItem(Guid productId, [FromBody] CartItem item)
         {
+            var customerCart = await GetCustomerCart();
+            var cartItem = await GetValidatedCartItem(productId, customerCart, item);
+
+            if (cartItem is null) return CustomResponse();
+
+            customerCart.UpdateUnits(cartItem, item.Amount);
+            
+            _customerCartRepository.UpdateCartItem(cartItem);
+            _customerCartRepository.UpdateCustomerCart(customerCart);
+
+            await PersistData();
+            
             return CustomResponse();
         }
 
         [HttpDelete("{productId:guid}")]
         public async Task<IActionResult> RemoveCartItem(Guid productId)
         {
+            var cart = await GetCustomerCart();
+
+            var cartItem = await GetValidatedCartItem(productId, cart);
+
+            if (cartItem is null) return CustomResponse();
+            
+        
             return CustomResponse();
         }
 
@@ -95,6 +110,36 @@ namespace NerdStoreEnterprise.Services.Cart.API.Controllers
             }
 
             _customerCartRepository.UpdateCustomerCart(cart);
+        }
+
+        private async Task<CartItem> GetValidatedCartItem(Guid productId, CustomerCart customerCart, CartItem item = null)
+        {
+            if (item is not null && !productId.Equals(item.ProductId))
+            {
+                AddError("The item does not match what was reported.");
+                return null;
+            }
+
+            if (customerCart is null)
+            {
+                AddError("Cart not found.");
+                return null;
+            }
+
+            var cartItem = await _customerCartRepository.GetCartItem(customerCart.Id, productId);
+
+            if (cartItem is not null && !customerCart.ProductExistsInCart(cartItem)) return cartItem;
+
+            AddError("The item isn't in the cart.");
+
+            return null;
+        }
+
+        private async Task PersistData()
+        {
+            var success = await _customerCartRepository.UnitOfWork.CommitAsync();
+
+            if (!success) AddError("There was an error persisting the data.");
         }
     }
 }

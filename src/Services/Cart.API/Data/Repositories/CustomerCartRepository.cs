@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Data;
@@ -35,6 +36,11 @@ namespace NerdStoreEnterprise.Services.Cart.API.Data.Repositories
             _context.CustomerCarts.Update(cart);
         }
 
+        public async Task<CartItem> GetCartItem(Guid cartId, Guid productId)
+        {
+            return await _context.CartItems.FirstOrDefaultAsync(x => x.CartId.Equals(cartId) && x.ProductId.Equals(productId));
+        }
+        
         public void AddCartItem(CartItem item)
         {
             _context.CartItems.Add(item);

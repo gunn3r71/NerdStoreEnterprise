@@ -1,5 +1,6 @@
 ﻿using System;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects;
+using NerdStoreEnterprise.BuildingBlocks.Core.Shared.Messages.IntegrationEvents;
 using NerdStoreEnterprise.Services.Cart.API.Validations;
 
 namespace NerdStoreEnterprise.Services.Cart.API.Models
@@ -34,6 +35,8 @@ namespace NerdStoreEnterprise.Services.Cart.API.Models
 
         internal void AddUnits(int amount) => Amount += amount;
 
+        internal void UpdateUnits(int amount) => Amount = amount;
+        
         internal bool IsValid() => new CartItemValidator().Validate(this).IsValid;
     }
 }
