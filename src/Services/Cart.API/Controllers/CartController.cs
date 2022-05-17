@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,8 @@ namespace NerdStoreEnterprise.Services.Cart.API.Controllers
                 HandleExistingCart(cart, item);
             }
 
+            if (!ValidateCart(cart)) return CustomResponse();
+
             await PersistData();
             
             return CustomResponse();
@@ -56,6 +59,8 @@ namespace NerdStoreEnterprise.Services.Cart.API.Controllers
             if (cartItem is null) return CustomResponse();
 
             customerCart.UpdateUnits(cartItem, item.Amount);
+
+            if (!ValidateCart(customerCart)) return CustomResponse();
             
             _customerCartRepository.UpdateCartItem(cartItem);
             _customerCartRepository.UpdateCustomerCart(customerCart);
@@ -73,8 +78,11 @@ namespace NerdStoreEnterprise.Services.Cart.API.Controllers
             var cartItem = await GetValidatedCartItem(productId, cart);
 
             if (cartItem is null) return CustomResponse();
+
+            if (!ValidateCart(cart)) return CustomResponse();
+
+            cart.RemoveItem(cartItem);
             
-        
             return CustomResponse();
         }
 
@@ -140,6 +148,15 @@ namespace NerdStoreEnterprise.Services.Cart.API.Controllers
             var success = await _customerCartRepository.UnitOfWork.CommitAsync();
 
             if (!success) AddError("There was an error persisting the data.");
+        }
+
+        private bool ValidateCart(CustomerCart cart)
+        {
+            if (cart.IsValid()) return true;
+
+            AddError(cart.ValidationResult.Errors.Select(x => x.ErrorMessage));
+
+            return false;
         }
     }
 }

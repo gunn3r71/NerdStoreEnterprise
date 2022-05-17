@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json.Serialization;
-using Microsoft.Extensions.WebEncoders.Testing;
+using FluentValidation.Results;
 using NerdStoreEnterprise.BuildingBlocks.Core.Shared.DomainObjects;
+using NerdStoreEnterprise.Services.Cart.API.Validations;
 
 namespace NerdStoreEnterprise.Services.Cart.API.Models
 {
@@ -21,11 +21,10 @@ namespace NerdStoreEnterprise.Services.Cart.API.Models
         public Guid CustomerId { get; private set; }
         public decimal Total { get; private set; }
         public List<CartItem> Items { get; private set; } = new();
+        public ValidationResult ValidationResult { get; private set; }
 
         internal void AddItem(CartItem item)
         {
-            if (!item.IsValid()) return;
-
             item.SetCart(Id);
 
             if (ProductExistsInCart(item))
@@ -51,13 +50,7 @@ namespace NerdStoreEnterprise.Services.Cart.API.Models
 
         internal void RemoveItem(CartItem item)
         {
-            if (!item.IsValid()) return;
-
-            var existingItem = GetProductById(item.ProductId);
-
-            if (existingItem is null) throw new DomainException("The item isn't in the cart.");
-            Items.Remove(existingItem);
-            
+            Items.Remove(GetProductById(item.ProductId));
             CalculateCartValue();
         }
         
@@ -66,10 +59,18 @@ namespace NerdStoreEnterprise.Services.Cart.API.Models
 
         internal CartItem GetProductById(Guid productId) => Items.SingleOrDefault(x => x.ProductId.Equals(productId));
 
+        internal bool IsValid()
+        {
+            var errors = Items.SelectMany(x => new CartItemValidator().Validate(x).Errors).ToList();
+            errors.AddRange(new CustomerCartValidator().Validate(this).Errors);
+
+            ValidationResult = new ValidationResult(errors);
+
+            return ValidationResult.IsValid;
+        }
+
         private void UpdateItem(CartItem item)
         {
-            if (!item.IsValid()) return;
-            
             item.SetCart(Id);
 
             var existingItem = GetProductById(item.ProductId);

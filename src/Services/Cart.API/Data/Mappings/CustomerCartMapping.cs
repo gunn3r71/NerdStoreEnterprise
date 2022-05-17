@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation.Results;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NerdStoreEnterprise.Services.Cart.API.Models;
 
@@ -22,6 +23,8 @@ namespace NerdStoreEnterprise.Services.Cart.API.Data.Mappings
 
             builder.HasIndex(x => x.CustomerId)
                 .HasDatabaseName("IDX_Customer_Cart");
+
+            builder.Ignore(x => x.ValidationResult);
         }
     }
 }

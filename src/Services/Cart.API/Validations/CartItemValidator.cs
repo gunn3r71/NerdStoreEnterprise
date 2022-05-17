@@ -10,7 +10,7 @@ namespace NerdStoreEnterprise.Services.Cart.API.Validations
         {
             RuleFor(x => x.ProductId)
                 .NotEqual(Guid.Empty)
-                .WithMessage("Product Id is invalid.");
+                .WithMessage("The product Id is invalid.");
 
             RuleFor(x => x.Name)
                 .NotNull()
@@ -18,10 +18,13 @@ namespace NerdStoreEnterprise.Services.Cart.API.Validations
 
             RuleFor(x => x.Amount)
                 .GreaterThan(0)
-                .LessThan(5);
+                .WithMessage(product => $"The quantity of {product.Name} must be greater than 0.")
+                .LessThan(5)
+                .WithMessage(product => $"The quantity of {product.Name} must be less than 5.");
 
             RuleFor(x => x.Price)
-                .GreaterThanOrEqualTo(0);
+                .GreaterThan(0)
+                .WithMessage(product => $"The {product.Name} value must be greater than 0.");
         }
     }
 }
