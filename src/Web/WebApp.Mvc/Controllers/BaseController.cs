@@ -8,7 +8,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
     [Authorize]
     public abstract class BaseController : Controller
     {
-        protected bool HasErrors(ErrorViewModel error)
+        protected bool HasErrors(ResponseResult error)
         {
             if (error is null || !error.Errors.Messages.Any()) return false;
 

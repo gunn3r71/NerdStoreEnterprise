@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using NerdStoreEnterprise.WebApp.Mvc.Exceptions;
+using NerdStoreEnterprise.WebApp.Mvc.Models.Errors;
 
 namespace NerdStoreEnterprise.WebApp.Mvc.Services
 {
@@ -41,5 +42,8 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Services
             response.EnsureSuccessStatusCode();
             return true;
         }
+
+        protected static ResponseResult ReturnOk() =>
+            new ResponseResult();
     }
 }

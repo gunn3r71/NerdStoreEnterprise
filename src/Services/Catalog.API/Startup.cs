@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NerdStoreEnterprise.Services.Catalog.API.Configuration;
+using NerdStoreEnterprise.Services.Catalog.API.Infrastructure.Seeders;
 
 namespace NerdStoreEnterprise.Services.Catalog.API
 {
@@ -15,14 +16,10 @@ namespace NerdStoreEnterprise.Services.Catalog.API
 
         private IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services)
-        {
+        public void ConfigureServices(IServiceCollection services) => 
             services.AddApiConfiguration(Configuration);
-        }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            app.UseApiConfiguration(env);
-        }
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IProductSeeder productSeeder) => 
+            app.UseApiConfiguration(env, productSeeder);
     }
 }

@@ -24,11 +24,19 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Data.Mappings
                 .HasMaxLength(500)
                 .IsRequired();
 
+            builder.Property(product => product.Image)
+                .IsRequired(false);
+
+            builder.Property(product => product.QuantityInStock)
+                .IsRequired();
+
             builder.Property(product => product.Price)
-                .HasPrecision(5, 2)
                 .IsRequired();
 
             builder.Property(product => product.CreatedAt)
+                .IsRequired();
+
+            builder.Property(product => product.Status)
                 .IsRequired();
         }
     }

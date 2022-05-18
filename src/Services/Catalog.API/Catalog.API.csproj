@@ -20,9 +20,11 @@
 
     <ItemGroup>
         <Folder Include="Data\Mappings\" />
+        <Folder Include="Infrastructure\Seeders\" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Building Blocks\Infrastructure\Infrastructure.csproj" />
       <ProjectReference Include="..\..\Building Blocks\WebAPI.Core\Core.csproj" />
     </ItemGroup>
 </Project>

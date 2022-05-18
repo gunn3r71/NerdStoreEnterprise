@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NerdStoreEnterprise.BuildingBlocks.Services.Core.Identity;
+using NerdStoreEnterprise.Services.Catalog.API.Infrastructure.Seeders;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Configuration
 {
@@ -23,7 +25,7 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Configuration
             services.AddCustomSwagger();
         }
 
-        public static void UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
+        public static void UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env, IProductSeeder productSeeder)
         {
             app.UseCustomSwagger(env);
 
@@ -32,6 +34,8 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Configuration
             app.UseRouting();
 
             app.UseCors("FullAccess");
+
+            productSeeder.Seed();
 
             app.UseCustomAuthentication();
 

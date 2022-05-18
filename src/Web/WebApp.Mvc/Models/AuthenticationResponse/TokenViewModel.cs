@@ -8,6 +8,6 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Models.AuthenticationResponse
         public double ExpiresIn { get; set; }
         public UserTokenInformationViewModel UserTokenInformation { get; set; }
 
-        public ErrorViewModel ErrorDetails { get; set; }
+        public ResponseResult ErrorDetails { get; set; }
     }
 }

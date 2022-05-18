@@ -10,25 +10,26 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6"/>
-        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.6"/>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.15"/>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.14"/>
-        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="5.0.1"/>
-        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0"/>
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2"/>
-        <PackageReference Include="Refit" Version="5.2.4"/>
+        <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.6" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.15" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.14" />
+        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="5.0.1" />
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+        <PackageReference Include="Refit" Version="5.2.4" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Exceptions\"/>
-        <Folder Include="Models\Products\"/>
-        <Folder Include="Services\Handlers\"/>
+        <Folder Include="Exceptions\" />
+        <Folder Include="Models\Cart\" />
+        <Folder Include="Models\Products\" />
+        <Folder Include="Services\Handlers\" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Building Blocks\Core\Shared.csproj"/>
-        <ProjectReference Include="..\..\Building Blocks\WebAPI.Core\Core.csproj"/>
+        <ProjectReference Include="..\..\Building Blocks\Core\Shared.csproj" />
+        <ProjectReference Include="..\..\Building Blocks\WebAPI.Core\Core.csproj" />
     </ItemGroup>
 
 </Project>

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NerdStoreEnterprise.Services.Catalog.API.Data;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Data.CatalogMigrations
 {
     [DbContext(typeof(CatalogDbContext))]
-    partial class CatalogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220517234111_Price")]
+    partial class Price
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,9 +33,6 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Data.CatalogMigrations
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(254)
@@ -41,12 +40,6 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Data.CatalogMigrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(65,30)");
-
-                    b.Property<int>("QuantityInStock")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 

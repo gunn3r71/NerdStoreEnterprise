@@ -32,7 +32,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
         [Route("error/{code:length(3,3):int}")]
         public IActionResult Error(int code)
         {
-            var model = new ErrorViewModel
+            var model = new ResponseResult
             {
                 Title = "Oops, something went wrong..",
                 Status = code,
@@ -53,7 +53,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Controllers
         [Route("system-unavailable")]
         public IActionResult SystemUnavailable()
         {
-            var model = new ErrorViewModel
+            var model = new ResponseResult
             {
                 Title = "System Unavailable",
                 Description = "The system is temporarily unavailable, this can happen due to user overload.",

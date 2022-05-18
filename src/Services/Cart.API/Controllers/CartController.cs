@@ -29,7 +29,7 @@ namespace NerdStoreEnterprise.Services.Cart.API.Controllers
             return await GetCustomerCart() ?? new CustomerCart();
         }
 
-        [HttpPost]
+        [HttpPost("item")]
         public async Task<IActionResult> AddCartItem(CartItem item)
         {
             var cart = await GetCustomerCart();
@@ -50,7 +50,7 @@ namespace NerdStoreEnterprise.Services.Cart.API.Controllers
             return CustomResponse();
         }
 
-        [HttpPut("{productId:guid}")]
+        [HttpPut("item/{productId:guid}")]
         public async Task<IActionResult> EditCartItem(Guid productId, [FromBody] CartItem item)
         {
             var customerCart = await GetCustomerCart();
@@ -70,7 +70,7 @@ namespace NerdStoreEnterprise.Services.Cart.API.Controllers
             return CustomResponse();
         }
 
-        [HttpDelete("{productId:guid}")]
+        [HttpDelete("item/{productId:guid}")]
         public async Task<IActionResult> RemoveCartItem(Guid productId)
         {
             var cart = await GetCustomerCart();

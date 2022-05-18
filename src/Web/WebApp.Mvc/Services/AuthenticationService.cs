@@ -28,7 +28,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Services
             if (!HandleResponse(response))
                 return new TokenViewModel
                 {
-                    ErrorDetails = await DeserializeResponseAsync<ErrorViewModel>(response)
+                    ErrorDetails = await DeserializeResponseAsync<ResponseResult>(response)
                 };
 
             return await DeserializeResponseAsync<TokenViewModel>(response);
@@ -43,7 +43,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Services
             if (!HandleResponse(response))
                 return new TokenViewModel
                 {
-                    ErrorDetails = await DeserializeResponseAsync<ErrorViewModel>(response)
+                    ErrorDetails = await DeserializeResponseAsync<ResponseResult>(response)
                 };
 
             return await DeserializeResponseAsync<TokenViewModel>(response);

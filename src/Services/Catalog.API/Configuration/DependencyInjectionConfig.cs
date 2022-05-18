@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NerdStoreEnterprise.Services.Catalog.API.Data;
 using NerdStoreEnterprise.Services.Catalog.API.Data.Repositories;
+using NerdStoreEnterprise.Services.Catalog.API.Infrastructure.Seeders;
 using NerdStoreEnterprise.Services.Catalog.API.Models;
 
 namespace NerdStoreEnterprise.Services.Catalog.API.Configuration
@@ -11,6 +12,7 @@ namespace NerdStoreEnterprise.Services.Catalog.API.Configuration
         {
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<CatalogDbContext>();
+            services.AddScoped<IProductSeeder, ProductSeeder>();
         }
     }
 }
