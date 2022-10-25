@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace NerdStoreEnterprise.BuildingBlocks.Services.Core.User
 {
-    public class AspNetUser : IAspNetUser
+    public class User : IUser
     {
         private readonly IHttpContextAccessor _contextAccessor;
 
-        public AspNetUser(IHttpContextAccessor contextAccessor)
+        public User(IHttpContextAccessor contextAccessor)
         {
             _contextAccessor = contextAccessor ?? throw new ArgumentNullException(nameof(contextAccessor));
         }

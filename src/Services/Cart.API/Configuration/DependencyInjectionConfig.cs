@@ -10,8 +10,7 @@ namespace NerdStoreEnterprise.Services.Cart.API.Configuration
     {
         public static void ResolveDependencies(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IAspNetUser, AspNetUser>();
+            services.AddLoggedUserDependencies();
             services.AddScoped<CartDbContext>();
         }
     }

@@ -13,10 +13,10 @@ namespace NerdStoreEnterprise.Services.Cart.API.Controllers
     [Authorize]
     public class CartController : BaseController
     {
-        private readonly IAspNetUser _user;
+        private readonly IUser _user;
         private readonly ICustomerCartRepository _customerCartRepository;
 
-        public CartController(IAspNetUser user, 
+        public CartController(IUser user, 
                               ICustomerCartRepository customerCartRepository)
         {
             _user = user ?? throw new ArgumentNullException(nameof(user));

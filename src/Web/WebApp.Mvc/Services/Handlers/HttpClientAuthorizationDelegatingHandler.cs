@@ -9,9 +9,9 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Services.Handlers
 {
     public class HttpClientAuthorizationDelegatingHandler : DelegatingHandler
     {
-        private readonly IAspNetUser _user;
+        private readonly IUser _user;
 
-        public HttpClientAuthorizationDelegatingHandler(IAspNetUser user)
+        public HttpClientAuthorizationDelegatingHandler(IUser user)
         {
             _user = user ?? throw new ArgumentNullException(nameof(user));
         }

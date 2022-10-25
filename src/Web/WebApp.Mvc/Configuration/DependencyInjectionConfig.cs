@@ -16,10 +16,7 @@ namespace NerdStoreEnterprise.WebApp.Mvc.Configuration
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddHttpServices(configuration);
-
-            services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
-
-            services.AddScoped<IAspNetUser, AspNetUser>();
+            services.AddLoggedUserDependencies();
         }
 
         private static void AddHttpServices(this IServiceCollection services, IConfiguration configuration)

@@ -1,6 +1,6 @@
 ﻿@using NerdStoreEnterprise.WebApp.Mvc.Extensions
 @using NerdStoreEnterprise.BuildingBlocks.Services.Core.User
-@inject IAspNetUser _appUser
+@inject IUser _appUser
 
 <ul class="navbar-nav">
     @if (_appUser.IsAuthenticated())

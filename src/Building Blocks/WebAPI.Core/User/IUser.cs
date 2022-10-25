@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace NerdStoreEnterprise.BuildingBlocks.Services.Core.User
 {
-    public interface IAspNetUser
+    public interface IUser
     {
         string Name { get; }
         Guid GetUserId();
